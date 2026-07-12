@@ -3,80 +3,78 @@
 <head>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Theme Definitions */
-    :root { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --accent: #0284c7; }
-    .theme-amoled { --bg: #000000; --card: #0a0a0a; --text: #ffffff; --accent: #10b981; }
-    .theme-neuro { --bg: #050508; --card: rgba(20, 20, 24, 0.7); --text: #e2e8f0; --accent: #6366f1; }
+    /* Layout Switcher */
+    .layout-gaming { display: grid; grid-template-columns: 80px 1fr; }
+    .layout-grid { display: grid; grid-template-columns: 240px 1fr; }
+    .layout-executive { display: block; }
+    .layout-amoled { background: #000; color: #fff; }
     
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.4s; }
-    .hub-card { background: var(--card); border: 1px solid rgba(100,116,139,0.2); border-radius: 24px; transition: 0.3s; }
-    .theme-neuro .hub-card { backdrop-filter: blur(15px); }
+    .card { background: rgba(255,255,255,0.05); border-radius: 20px; backdrop-filter: blur(10px); }
   </style>
 </head>
-<body class="p-8">
+<body id="app-container" class="transition-all duration-500 bg-slate-950 text-white min-h-screen">
+  
+  <div id="layout-wrapper" class="p-6">
+    <!-- Dynamic Sidebar (Conditional) -->
+    <nav id="sidebar" class="hidden w-20 flex-col items-center gap-6 py-6 border-r border-white/10">
+      <div class="p-2 bg-emerald-500 rounded-xl">G/</div>
+      <!-- Sidebar Links -->
+    </nav>
 
-  <main class="max-w-7xl mx-auto space-y-10">
-    <!-- Header with Theme Switcher -->
-    <header class="flex justify-between items-center">
-      <h1 class="text-4xl font-black uppercase tracking-tighter">Admin Hub</h1>
-      <div class="flex gap-2">
-        <button onclick="setTheme('')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 rounded-xl text-xs font-bold">PROFESSIONAL</button>
-        <button onclick="setTheme('theme-amoled')" class="px-4 py-2 bg-emerald-900 text-emerald-400 rounded-xl text-xs font-bold">AMOLED DARK</button>
-        <button onclick="setTheme('theme-neuro')" class="px-4 py-2 bg-indigo-900 text-indigo-400 rounded-xl text-xs font-bold">NEURO-FIN</button>
-      </div>
-    </header>
+    <!-- Main Content -->
+    <main id="main-content" class="p-8">
+      <!-- Overview Console -->
+      <header class="mb-10">
+        <h1 class="text-3xl font-black italic">SUPER ADMIN HUB</h1>
+        <p class="text-emerald-500 uppercase tracking-widest text-xs">Operational Control Center</p>
+      </header>
 
-    <!-- Central SWM Dashboard Console -->
-    <section class="hub-card p-10 bg-gradient-to-r from-blue-900/10 to-indigo-900/10">
-      <h2 class="text-lg font-bold mb-6 opacity-70">STATEWIDE FORWARD LINKAGE CONSOLE</h2>
-      <div class="grid grid-cols-3 gap-8">
-        <div class="border-r border-slate-500/20">
-          <p class="text-xs uppercase font-bold tracking-widest opacity-60">Total Waste</p>
-          <p class="text-4xl font-black mt-2">45,230 <span class="text-sm font-normal">Kg</span></p>
+      <!-- Grid Cards -->
+      <section id="content-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Central Metric Card -->
+        <div class="card p-8 col-span-2 bg-gradient-to-r from-emerald-900/20 to-transparent">
+          <h2 class="font-bold">SWM Statewide Forward Linkage</h2>
+          <div class="text-5xl font-black mt-4">45,230 <span class="text-xl font-normal">Kg Total Waste</span></div>
         </div>
-        <div class="border-r border-slate-500/20">
-          <p class="text-xs uppercase font-bold tracking-widest opacity-60">Recyclables</p>
-          <p class="text-4xl font-black mt-2 text-emerald-500">32,100 <span class="text-sm font-normal">Kg</span></p>
-        </div>
-        <div>
-          <p class="text-xs uppercase font-bold tracking-widest opacity-60">Rejects</p>
-          <p class="text-4xl font-black mt-2 text-rose-500">1,200 <span class="text-sm font-normal">Kg</span></p>
-        </div>
-      </div>
-    </section>
 
-    <!-- Controller & Map Grid -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div class="hub-card p-6 cursor-pointer hover:scale-105">
-        <div class="w-12 h-12 bg-blue-500/10 text-blue-500 flex items-center justify-center rounded-2xl mb-4">⚙️</div>
-        <h3 class="font-bold">District Wise Controller</h3>
-      </div>
-      <div class="hub-card p-6 cursor-pointer hover:scale-105">
-        <div class="w-12 h-12 bg-purple-500/10 text-purple-500 flex items-center justify-center rounded-2xl mb-4">📊</div>
-        <h3 class="font-bold">Dashboard Controller</h3>
-      </div>
-      <div class="hub-card p-6 cursor-pointer hover:scale-105">
-        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-500 flex items-center justify-center rounded-2xl mb-4">🗄️</div>
-        <h3 class="font-bold">Statewide Master DB</h3>
-      </div>
-      <div class="hub-card p-6 cursor-pointer hover:scale-105 bg-indigo-600 text-white">
-        <div class="w-12 h-12 bg-white/20 flex items-center justify-center rounded-2xl mb-4">🗺️</div>
-        <h3 class="font-bold">District Sheets Map</h3>
-      </div>
-    </section>
-  </main>
+        <!-- Secondary Widget -->
+        <div class="card p-8">
+          <h3 class="text-sm opacity-50">Operational Status</h3>
+          <div class="text-2xl font-bold mt-2 text-emerald-400">ACTIVE</div>
+        </div>
+      </section>
+    </main>
+  </div>
 
-  <!-- Footer with GA Logo -->
-  <footer class="mt-20 text-center text-slate-500 pb-10">
-    <div class="mb-4">
-      <img src="GOKUL GA.png" alt="GA Logo" class="w-16 h-16 mx-auto bg-white p-1 rounded-xl shadow-xl">
-    </div>
-    <p class="text-xs font-bold tracking-widest uppercase">Designed and Developed by Gokul GA | Suchitwa Mission</p>
+  <!-- Footer with Logo -->
+  <footer class="mt-20 p-8 text-center border-t border-white/5">
+    <img src="GOKUL GA.png" alt="GA Logo" class="w-16 h-16 mx-auto bg-white p-2 rounded-2xl shadow-2xl mb-4">
+    <p class="text-[10px] tracking-widest uppercase opacity-40">Designed and Developed by Gokul GA | Suchitwa Mission</p>
   </footer>
 
   <script>
-    function setTheme(theme) {
-      document.body.className = theme;
+    function setLayout(mode) {
+      const wrapper = document.getElementById('layout-wrapper');
+      const sidebar = document.getElementById('sidebar');
+      const container = document.getElementById('app-container');
+      
+      // Reset
+      wrapper.className = 'p-6'; 
+      sidebar.classList.add('hidden');
+      container.className = 'transition-all duration-500 bg-slate-950';
+
+      if(mode === 'gaming') { 
+        wrapper.classList.add('layout-gaming'); 
+        sidebar.classList.remove('hidden'); 
+      } 
+      else if(mode === 'finance') { 
+        wrapper.classList.add('layout-grid'); 
+        sidebar.classList.remove('hidden'); 
+        sidebar.className = 'w-60 p-8 border-r border-white/10';
+      }
+      else if(mode === 'amoled') {
+        container.classList.add('layout-amoled');
+      }
     }
   </script>
 </body>
