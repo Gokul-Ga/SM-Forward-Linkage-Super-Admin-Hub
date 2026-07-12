@@ -3,60 +3,80 @@
 <head>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Global Theme Variables */
-    :root { --bg: #0f172a; --card: rgba(30, 41, 59, 0.7); --text: #f8fafc; --accent: #38bdf8; }
-    .theme-amoled { --bg: #000000; --card: #121212; --text: #e0e0e0; --accent: #10b981; }
-    .theme-neuro { --bg: #0a0a0c; --card: rgba(20, 20, 24, 0.8); --text: #ffffff; --accent: #6366f1; }
+    /* Theme Definitions */
+    :root { --bg: #f1f5f9; --card: #ffffff; --text: #0f172a; --accent: #0284c7; }
+    .theme-amoled { --bg: #000000; --card: #0a0a0a; --text: #ffffff; --accent: #10b981; }
+    .theme-neuro { --bg: #050508; --card: rgba(20, 20, 24, 0.7); --text: #e2e8f0; --accent: #6366f1; }
     
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.5s; }
-    .glass-card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px); }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.4s; }
+    .hub-card { background: var(--card); border: 1px solid rgba(100,116,139,0.2); border-radius: 24px; transition: 0.3s; }
+    .theme-neuro .hub-card { backdrop-filter: blur(15px); }
   </style>
 </head>
-<body class="p-6">
+<body class="p-8">
 
-  <!-- Overview Console -->
-  <main class="max-w-7xl mx-auto space-y-8">
+  <main class="max-w-7xl mx-auto space-y-10">
+    <!-- Header with Theme Switcher -->
     <header class="flex justify-between items-center">
-      <h1 class="text-3xl font-black uppercase tracking-tighter">Super Admin Hub</h1>
-      <div id="theme-selector" class="flex gap-2">
-        <button onclick="setTheme('default')" class="px-4 py-2 bg-slate-800 rounded-lg text-xs">Professional</button>
-        <button onclick="setTheme('amoled')" class="px-4 py-2 bg-slate-800 rounded-lg text-xs">Amoled Dark</button>
-        <button onclick="setTheme('neuro')" class="px-4 py-2 bg-slate-800 rounded-lg text-xs">Neuro-Fin</button>
+      <h1 class="text-4xl font-black uppercase tracking-tighter">Admin Hub</h1>
+      <div class="flex gap-2">
+        <button onclick="setTheme('')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 rounded-xl text-xs font-bold">PROFESSIONAL</button>
+        <button onclick="setTheme('theme-amoled')" class="px-4 py-2 bg-emerald-900 text-emerald-400 rounded-xl text-xs font-bold">AMOLED DARK</button>
+        <button onclick="setTheme('theme-neuro')" class="px-4 py-2 bg-indigo-900 text-indigo-400 rounded-xl text-xs font-bold">NEURO-FIN</button>
       </div>
     </header>
 
-    <!-- Main Central Card -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="md:col-span-2 glass-card p-8 bg-gradient-to-br from-slate-900 to-slate-800">
-        <h2 class="text-xl font-bold mb-4">SWM - FL Statewide Dashboard</h2>
-        <div class="flex gap-8">
-          <div><p class="text-slate-400 text-xs">Total Waste</p><p class="text-2xl font-bold text-sky-400">45,230 Kg</p></div>
-          <div><p class="text-slate-400 text-xs">Recyclables</p><p class="text-2xl font-bold text-emerald-400">32,100 Kg</p></div>
-          <div><p class="text-slate-400 text-xs">Rejects</p><p class="text-2xl font-bold text-red-400">1,200 Kg</p></div>
-        </div> 
+    <!-- Central SWM Dashboard Console -->
+    <section class="hub-card p-10 bg-gradient-to-r from-blue-900/10 to-indigo-900/10">
+      <h2 class="text-lg font-bold mb-6 opacity-70">STATEWIDE FORWARD LINKAGE CONSOLE</h2>
+      <div class="grid grid-cols-3 gap-8">
+        <div class="border-r border-slate-500/20">
+          <p class="text-xs uppercase font-bold tracking-widest opacity-60">Total Waste</p>
+          <p class="text-4xl font-black mt-2">45,230 <span class="text-sm font-normal">Kg</span></p>
+        </div>
+        <div class="border-r border-slate-500/20">
+          <p class="text-xs uppercase font-bold tracking-widest opacity-60">Recyclables</p>
+          <p class="text-4xl font-black mt-2 text-emerald-500">32,100 <span class="text-sm font-normal">Kg</span></p>
+        </div>
+        <div>
+          <p class="text-xs uppercase font-bold tracking-widest opacity-60">Rejects</p>
+          <p class="text-4xl font-black mt-2 text-rose-500">1,200 <span class="text-sm font-normal">Kg</span></p>
+        </div>
       </div>
     </section>
 
-    <!-- Shortcut Grid -->
-    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="glass-card p-4 hover:border-accent cursor-pointer transition">
-        <div class="w-10 h-10 mb-4 bg-sky-500/20 rounded-full flex items-center justify-center">🌐</div>
-        <p class="text-sm font-bold">Master Database</p>
+    <!-- Controller & Map Grid -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="hub-card p-6 cursor-pointer hover:scale-105">
+        <div class="w-12 h-12 bg-blue-500/10 text-blue-500 flex items-center justify-center rounded-2xl mb-4">⚙️</div>
+        <h3 class="font-bold">District Wise Controller</h3>
       </div>
-      <!-- Repeat for other controllers -->
+      <div class="hub-card p-6 cursor-pointer hover:scale-105">
+        <div class="w-12 h-12 bg-purple-500/10 text-purple-500 flex items-center justify-center rounded-2xl mb-4">📊</div>
+        <h3 class="font-bold">Dashboard Controller</h3>
+      </div>
+      <div class="hub-card p-6 cursor-pointer hover:scale-105">
+        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-500 flex items-center justify-center rounded-2xl mb-4">🗄️</div>
+        <h3 class="font-bold">Statewide Master DB</h3>
+      </div>
+      <div class="hub-card p-6 cursor-pointer hover:scale-105 bg-indigo-600 text-white">
+        <div class="w-12 h-12 bg-white/20 flex items-center justify-center rounded-2xl mb-4">🗺️</div>
+        <h3 class="font-bold">District Sheets Map</h3>
+      </div>
     </section>
   </main>
 
-  <footer class="mt-12 pt-6 border-t border-white/10 text-center text-xs text-slate-500">
-  <div class="mb-3 flex justify-center">
-    <img src="GOKUL GA.png" alt="GA Logo" class="w-12 h-12 rounded-lg bg-white p-1 shadow-lg">
-  </div>
-  <p>Designed and Developed by Gokul GA | Suchitwa Mission</p>
-</footer>
+  <!-- Footer with GA Logo -->
+  <footer class="mt-20 text-center text-slate-500 pb-10">
+    <div class="mb-4">
+      <img src="GOKUL GA.png" alt="GA Logo" class="w-16 h-16 mx-auto bg-white p-1 rounded-xl shadow-xl">
+    </div>
+    <p class="text-xs font-bold tracking-widest uppercase">Designed and Developed by Gokul GA | Suchitwa Mission</p>
+  </footer>
 
   <script>
     function setTheme(theme) {
-      document.body.className = theme === 'amoled' ? 'theme-amoled' : theme === 'neuro' ? 'theme-neuro' : '';
+      document.body.className = theme;
     }
   </script>
 </body>
