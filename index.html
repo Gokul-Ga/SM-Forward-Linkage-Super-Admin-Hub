@@ -2,95 +2,76 @@
 <html lang="en">
 <head>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; transition: background 0.6s ease; }
-    
-    /* Theme Engine */
-    .theme-gaming { background: #0c0f0e; color: #fff; --card: rgba(255,255,255,0.05); }
-    .theme-finance { background: #050608; color: #e2e8f0; --card: rgba(20, 20, 24, 0.7); }
-    .theme-executive { background: #f8fafc; color: #0f172a; --card: #ffffff; border: 1px solid #e2e8f0; }
-    .theme-amoled { background: #000; color: #fff; --card: #111; }
-
-    .card { background: var(--card); border-radius: 24px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-    .sidebar-icon { opacity: 0.5; cursor: pointer; transition: 0.3s; }
-    .sidebar-icon:hover { opacity: 1; color: #10b981; }
+    body { transition: all 0.5s ease; }
+    .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; }
   </style>
 </head>
-<body id="app-body" class="theme-gaming">
+<body id="body" class="bg-slate-950 text-white min-h-screen">
 
-  <div class="flex min-h-screen">
-    <!-- Sidebar -->
-    <nav class="w-24 border-r border-white/5 flex flex-col items-center py-10 gap-10">
-      <div class="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center font-black">G/</div>
-      <div class="flex flex-col gap-8 text-xl">
-        <div class="sidebar-icon">⚙️</div>
-        <div class="sidebar-icon">📊</div>
-        <div class="sidebar-icon">🗄️</div>
-        <div class="sidebar-icon">🗺️</div>
+  <div id="wrapper" class="flex">
+    <!-- Sidebar Navigation -->
+    <nav id="nav" class="w-20 flex flex-col items-center py-8 border-r border-white/5">
+      <div class="mb-10 text-emerald-500 font-bold">G/</div>
+      <div id="nav-links" class="flex flex-col gap-8 text-xl">
+        <div>⚙️</div><div>📊</div><div>🗄️</div><div>🗺️</div>
       </div>
     </nav>
 
-    <!-- Main View -->
-    <main class="flex-1 p-12">
-      <header class="flex justify-between items-start mb-16">
+    <!-- Main Dynamic Workspace -->
+    <main id="workspace" class="flex-1 p-10">
+      <header class="flex justify-between mb-10">
         <div>
-          <h1 class="text-5xl font-black tracking-tighter italic">SUPER ADMIN HUB</h1>
-          <p class="text-emerald-500 uppercase tracking-widest text-xs mt-2 font-bold">Operational Control Center</p>
+          <h1 class="text-4xl font-black italic">SUPER ADMIN HUB</h1>
+          <p class="text-emerald-500 uppercase tracking-widest text-[10px]">Operational Control Center</p>
         </div>
-        
-        <!-- Theme Selector -->
-        <div class="flex gap-2 bg-white/5 p-1 rounded-2xl">
-          <button onclick="setTheme('theme-gaming')" class="px-4 py-2 rounded-xl text-[10px] font-bold">GAMING</button>
-          <button onclick="setTheme('theme-finance')" class="px-4 py-2 rounded-xl text-[10px] font-bold">FINANCE</button>
-          <button onclick="setTheme('theme-executive')" class="px-4 py-2 rounded-xl text-[10px] font-bold bg-white text-black">EXECUTIVE</button>
-          <button onclick="setTheme('theme-amoled')" class="px-4 py-2 rounded-xl text-[10px] font-bold">AMOLED</button>
+        <!-- Layout Switcher -->
+        <div class="flex gap-1 bg-white/5 p-1 rounded-xl" id="switcher">
+          <button onclick="applyLayout('gaming')" class="px-3 py-1 text-[10px] font-bold">GAMING</button>
+          <button onclick="applyLayout('finance')" class="px-3 py-1 text-[10px] font-bold">FINANCE</button>
+          <button onclick="applyLayout('executive')" class="px-3 py-1 text-[10px] font-bold bg-white text-black rounded-lg">EXECUTIVE</button>
+          <button onclick="applyLayout('amoled')" class="px-3 py-1 text-[10px] font-bold">AMOLED</button>
         </div>
       </header>
 
-      <!-- Dashboard Grid -->
-      <section class="grid grid-cols-12 gap-6">
-        <!-- Main Stats -->
-        <div class="card p-10 col-span-8 bg-gradient-to-br from-emerald-900/20 to-transparent">
-          <h2 class="text-sm font-bold opacity-50 mb-4">STATEWIDE FORWARD LINKAGE</h2>
-          <div class="text-7xl font-black">45,230 <span class="text-2xl font-light opacity-50">Kg Total Waste</span></div>
-          <div class="flex gap-10 mt-8">
-            <div><p class="text-[10px] opacity-50 uppercase">Recyclables</p><p class="text-xl font-bold text-emerald-400">32,100 Kg</p></div>
-            <div><p class="text-[10px] opacity-50 uppercase">Rejects</p><p class="text-xl font-bold text-rose-400">1,200 Kg</p></div>
-          </div>
-        </div>
-
-        <!-- Status Card -->
-        <div class="card p-8 col-span-4 flex flex-col justify-between">
-          <h3 class="text-xs font-bold uppercase opacity-50">Operational Status</h3>
-          <div class="text-4xl font-black text-emerald-500">ACTIVE</div>
-        </div>
-
-        <!-- Controller Cards -->
-        <div class="card p-6 col-span-3 flex items-center gap-4 hover:border-emerald-500 transition cursor-pointer">
-          <div class="text-3xl">⚙️</div><div><p class="text-xs font-bold">District Wise</p><p class="text-[10px] opacity-50">Controller</p></div>
-        </div>
-        <div class="card p-6 col-span-3 flex items-center gap-4 hover:border-emerald-500 transition cursor-pointer">
-          <div class="text-3xl">📊</div><div><p class="text-xs font-bold">Dashboard</p><p class="text-[10px] opacity-50">Script Engine</p></div>
-        </div>
-        <div class="card p-6 col-span-3 flex items-center gap-4 hover:border-emerald-500 transition cursor-pointer">
-          <div class="text-3xl">🗄️</div><div><p class="text-xs font-bold">Master Database</p><p class="text-[10px] opacity-50">Statewide</p></div>
-        </div>
-        <div class="card p-6 col-span-3 flex items-center gap-4 hover:border-emerald-500 transition cursor-pointer">
-          <div class="text-3xl">🗺️</div><div><p class="text-xs font-bold">District Maps</p><p class="text-[10px] opacity-50">Sheet Index</p></div>
-        </div>
-      </section>
+      <!-- Dynamic Grid -->
+      <div id="grid" class="grid grid-cols-12 gap-6">
+        <!-- Content will be injected/reordered here by applyLayout -->
+      </div>
     </main>
   </div>
 
-  <footer class="mt-20 p-10 text-center border-t border-white/5">
-    <img src="GOKUL GA.png" alt="GA Logo" class="w-20 h-20 mx-auto bg-white p-2 rounded-2xl shadow-2xl mb-4">
-    <p class="text-[10px] tracking-widest uppercase opacity-40">Designed and Developed by Gokul GA | Suchitwa Mission</p>
-  </footer>
-
   <script>
-    function setTheme(theme) {
-      document.body.className = theme;
+    function applyLayout(mode) {
+      const grid = document.getElementById('grid');
+      const nav = document.getElementById('nav');
+      
+      // Structure logic based on layout type
+      if (mode === 'gaming') {
+        grid.innerHTML = `
+          <div class="card p-10 col-span-12 h-64 flex items-center bg-gradient-to-r from-emerald-900/20">
+            <h2 class="text-6xl font-black">GAMING LAYOUT: Sidebar + Large Metrics</h2>
+          </div>
+        `;
+        nav.style.display = 'flex';
+      } 
+      else if (mode === 'finance') {
+        grid.innerHTML = `
+          <div class="card p-6 col-span-4 h-96">Finance Chart Widget</div>
+          <div class="card p-6 col-span-8 h-96">Large Portfolio Overview</div>
+        `;
+        nav.style.width = '240px'; // Side-heavy layout
+      }
+      else if (mode === 'executive') {
+        grid.innerHTML = `
+          <div class="card p-10 col-span-12">Clean Executive Centralized Metrics</div>
+        `;
+        nav.style.display = 'none'; // Minimalist
+      }
+      else if (mode === 'amoled') {
+        document.body.className = 'bg-black text-white';
+        grid.innerHTML = `<div class="col-span-12 p-20 text-center font-black text-5xl">AMOLED PURE DARK</div>`;
+      }
     }
   </script>
 </body>
