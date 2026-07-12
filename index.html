@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suchitwa Mission - Super Admin Master Hub</title>
+  <link rel="icon" type="image/png" href="https://suchitwamission.org/public/img/logo/fav.svg" sizes="32x32">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap');
+    
+    * { font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+    
+    /* Smooth View Animations */
+    .page-pane { display: none; opacity: 0; transform: translateY(8px); transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .page-pane.active { display: block; opacity: 1; transform: translateY(0); }
+    
+    /* ========================================================================= */
+    /* MASTER DATA INJECTED MULTI-THEME LAYOUT PALETTES                          */
+    /* ========================================================================= */
+    
+    /* Theme 1: Midnight Cyber (NeuroBank Template Ecosystem) */
+    .theme-cyber { --bg-main: #090f1d; --bg-card: rgba(15, 23, 42, 0.6); --border-tint: rgba(255, 255, 255, 0.05); --text-base: #f8fafc; --text-muted: #94a3b8; --accent-neon: #38bdf8; --sidebar: #0f172a; --glass: blur(16px); }
+    
+    /* Theme 2: Tactical Carbon (Charcoal Dark Gaming Interface) */
+    .theme-carbon { --bg-main: #121212; --bg-card: rgba(26, 26, 26, 0.8); --border-tint: rgba(255, 255, 255, 0.03); --text-base: #e0e0e0; --text-muted: #757575; --accent-neon: #10b981; --sidebar: #1a1a1a; --glass: blur(20px); }
+    
+    /* Theme 3: Executive Light (Clean Off-White Corporate Canvas) */
+    .theme-light { --bg-main: #f1f5f9; --bg-card: #ffffff; --border-tint: rgba(0, 0, 0, 0.06); --text-base: #0f172a; --text-muted: #475569; --accent-neon: #0284c7; --sidebar: #ffffff; --glass: none; }
+
+    body { background-color: var(--bg-main); color: var(--text-base); }
+    .hub-card { background: var(--bg-card); backdrop-filter: var(--glass); -webkit-backdrop-filter: var(--glass); border: 1px solid var(--border-tint); }
+    .sidebar-panel { background-color: var(--sidebar); border-right: 1px solid var(--border-tint); }
+    .text-dim { color: var(--text-muted); }
+    .accent-color { color: var(--accent-neon); }
+    .accent-border { border-color: var(--accent-neon); }
+    .accent-bg { background-color: var(--accent-neon); }
+
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+  </style>
+</head>
+<body class="theme-cyber min-h-screen flex flex-col justify-between overflow-x-hidden" id="master-hub-body">
+
+  <div class="flex flex-1 min-h-screen">
+    <!-- SIDEBAR MASTER NAVIGATION NAV MATRIX -->
+    <aside class="w-64 sidebar-panel hidden md:flex flex-col justify-between p-6 shrink-0 select-none">
+      <div class="space-y-8">
+        <!-- Brand System Header -->
+        <div class="flex items-center gap-3">
+          <div class="bg-white p-1 rounded-lg h-9 w-20 flex items-center justify-center overflow-hidden shadow-inner">
+            <img src="https://gokul-ga.github.io/SM-Forward-Linkage-Dashboard/SM%20LOGO.png" alt="SM Logo" class="h-full object-contain">
+          </div>
+          <div>
+            <h1 class="text-xs font-black tracking-widest uppercase">Gokul GA</h1>
+            <p class="text-[9px] font-bold text-dim tracking-wide uppercase">Super Admin Hub</p>
+          </div>
+        </div>
+
+        <!-- Links System Router -->
+        <nav class="space-y-1">
+          <button onclick="switchViewPane('overview')" id="nav-overview" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all bg-white/5 accent-color">
+            📊 Overview Console
+          </button>
+          <button onclick="switchViewPane('districts')" id="nav-districts" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-dim hover:bg-white/5 hover:text-white transition-all">
+            📍 District Sheets Map
+          </button>
+          <button onclick="switchViewPane('settings')" id="nav-settings" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-dim hover:bg-white/5 hover:text-white transition-all">
+            ⚙️ Control & Themes
+          </button>
+        </nav>
+      </div>
+
+      <!-- Quick Pipeline Core Links Badge -->
+      <div class="p-4 hub-card rounded-2xl space-y-2">
+        <span class="text-[9px] font-bold tracking-widest text-dim uppercase block">Core System Node</span>
+        <div class="flex items-center gap-2 text-xs font-bold text-emerald-400">
+          <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div> Secure API Link
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONSOLE INTERFACE CANVAS PANEL -->
+    <main class="flex-1 flex flex-col min-w-0 p-4 md:p-8 space-y-6">
+      
+      <!-- TOP INTERFACE MOBILE ACTION BAR -->
+      <header class="flex justify-between items-center pb-4 border-b border-white/5">
+        <div>
+          <h2 id="current-pane-title" class="text-lg font-bold tracking-tight uppercase">Overview Console</h2>
+          <p class="text-xs text-dim font-medium">Local Self Government Department Kerala</p>
+        </div>
+        <!-- Time Sync Readout -->
+        <div class="text-right hidden sm:block">
+          <p id="live-time-ticker" class="text-xs font-bold tracking-tight">July 2026</p>
+          <p class="text-[10px] text-dim font-bold uppercase tracking-wider">System Clock Active</p>
+        </div>
+      </header>
+
+      <!-- ========================================================================= -->
+      <!-- PANE 1: OVERVIEW CONTROL CONSOLE                                          -->
+      <!-- ========================================================================= */ -->
+      <div id="pane-overview" class="page-pane active space-y-6">
+        <!-- Top Operational Engine Architecture Nodes Links Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <a href="https://gokul-ga.github.io/SM-Forward-Linkage-Dashboard/" target="_blank" class="p-5 hub-card rounded-2xl relative overflow-hidden transition-all duration-300 hover:-translate-y-1 group">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-sky-500/5 rounded-full blur-xl transition-all group-hover:bg-sky-500/10"></div>
+            <span class="text-[10px] font-bold text-dim uppercase tracking-wider">Public Core Visualizer</span>
+            <h3 class="text-base font-bold mt-1 group-hover:text-sky-400 transition-colors">SWM - FL Statewide Dashboard ↗</h3>
+            <p class="text-xs text-dim mt-2 font-medium">Hosted on GitHub pages parsing statewide architecture metrics arrays.</p>
+          </a>
+          <a href="https://script.google.com/home" target="_blank" class="p-5 hub-card rounded-2xl relative overflow-hidden transition-all duration-300 hover:-translate-y-1 group">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-xl transition-all group-hover:bg-emerald-500/10"></div>
+            <span class="text-[10px] font-bold text-dim uppercase tracking-wider">Logic Execution Engine</span>
+            <h3 class="text-base font-bold mt-1 group-hover:text-emerald-400 transition-colors">District Wise Sheet Controller ↗</h3>
+            <p class="text-xs text-dim mt-2 font-medium">Standalone Apps Script processing background edit listeners and synchronization triggers.</p>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/" target="_blank" class="p-5 hub-card rounded-2xl relative overflow-hidden transition-all duration-300 hover:-translate-y-1 group sm:col-span-2 lg:col-span-1">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-xl transition-all group-hover:bg-indigo-500/10"></div>
+            <span class="text-[10px] font-bold text-dim uppercase tracking-wider">Central Data Hub Warehouse</span>
+            <h3 class="text-base font-bold mt-1 group-hover:text-indigo-400 transition-colors">Statewide Forward Linkage Database ↗</h3>
+            <p class="text-xs text-dim mt-2 font-medium">The master ledger hosting consolidated row accumulators directly from fields.</p>
+          </a>
+        </div>
+
+        <!-- Real-Time Timeline District Tracker Logging Table Grid Component -->
+        <div class="p-5 hub-card rounded-2xl space-y-4 shadow-xl">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-dim">📅 Live District Activity & Sync Timeline</h3>
+            <span class="text-[10px] accent-color font-bold tracking-wider px-2.5 py-1 bg-white/5 rounded-full uppercase animate-pulse">Live Tracking Stream Active</span>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-white/5">
+            <table class="w-full text-left border-collapse text-xs whitespace-nowrap">
+              <thead>
+                <tr class="bg-white/5 border-b border-white/5 text-dim font-bold uppercase">
+                  <th class="p-3.5 text-center">Sl No.</th>
+                  <th class="p-3.5">Target Registry District</th>
+                  <th class="p-3.5 text-center">Active Target Reporting Month</th>
+                  <th class="p-3.5 text-right">System Sync Footprint</th>
+                  <th class="p-3.5 text-center">Operational State</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 font-medium" id="live-timeline-rows">
+                <!-- Dynamically filled on loop configuration parameters -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- PANE 2: DISTRICT ENTRY SHEET REPOSITORY DIRECTORY MATRIX                  -->
+      <!-- ========================================================================= */ -->
+      <div id="pane-districts" class="page-pane space-y-4">
+        <p class="text-xs text-dim font-semibold tracking-wide uppercase mb-2">🚀 Launch District Forms Logs Directly In New Browser Tabs</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="district-cards-container">
+          <!-- Populated directly by structural layout arrays parameters -->
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- PANE 3: CONTROL SWITCH SYSTEM ADJUSTMENT SETTINGS                          -->
+      <!-- ========================================================================= */ -->
+      <div id="pane-settings" class="page-pane max-w-xl space-y-6">
+        <div class="p-6 hub-card rounded-2xl space-y-4 shadow-2xl">
+          <h3 class="text-sm font-bold tracking-tight uppercase">System Customization Settings</h3>
+          <p class="text-xs text-dim">Swap UI theme presets instantly across the engine interface canvas mapping parameters.</p>
+          
+          <div class="space-y-3 pt-2">
+            <label class="block text-[11px] font-bold text-dim uppercase tracking-widest">Select Dashboard Workspace Layout Theme</label>
+            <div class="grid grid-cols-1 gap-2">
+              <button onclick="toggleGlobalThemeEngine('cyber')" class="flex justify-between items-center p-4 rounded-xl border border-sky-500/30 bg-sky-500/5 text-left text-xs font-bold tracking-tight">
+                <div>
+                  <p class="text-sky-400">🌌 Midnight Cyber Profile</p>
+                  <p class="text-[11px] text-dim font-medium mt-0.5">NeuroBank Template Blueprint Grid (Translucent glass layers)</p>
+                </div>
+                <span id="badge-cyber" class="text-[10px] bg-sky-400 text-slate-950 px-2 py-0.5 rounded font-extrabold uppercase">Active</span>
+              </button>
+              <button onclick="toggleGlobalThemeEngine('carbon')" class="flex justify-between items-center p-4 rounded-xl border border-white/5 hover:border-emerald-500/30 text-left text-xs font-bold tracking-tight">
+                <div>
+                  <p class="text-dim hover:text-white" id="title-carbon">🔋 Tactical Carbon Profile</p>
+                  <p class="text-[11px] text-dim font-medium mt-0.5">Matte Charcoal Gaming Console Grid (Emerald green nodes configuration)</p>
+                </div>
+                <span id="badge-carbon" class="text-[10px] bg-white/5 text-dim px-2 py-0.5 rounded font-extrabold uppercase hidden">Select</span>
+              </button>
+              <button onclick="toggleGlobalThemeEngine('light')" class="flex justify-between items-center p-4 rounded-xl border border-white/5 hover:border-sky-600/30 text-left text-xs font-bold tracking-tight">
+                <div>
+                  <p class="text-dim hover:text-white" id="title-light">🏢 Executive Light Canvas</p>
+                  <p class="text-[11px] text-dim font-medium mt-0.5">Cognify Clean Corporate Workspace (Crisp high contrast layout)</p>
+                </div>
+                <span id="badge-light" class="text-[10px] bg-white/5 text-dim px-2 py-0.5 rounded font-extrabold uppercase hidden">Select</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- INTEGRATED CONSOLIDATED EXECUTIVE ENGINEERING FOOTER BAR METRIC          -->
+  <!-- ========================================================================= */ -->
+  <footer class="w-full py-5 px-6 hub-card border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs select-none">
+    <div class="flex items-center gap-3">
+      <div class="bg-white p-1 rounded-md h-7 w-16 flex items-center justify-center overflow-hidden">
+        <img src="https://gokul-ga.github.io/SM-Forward-Linkage-Dashboard/SM%20LOGO.png" alt="SM Logo View" class="h-full object-contain">
+      </div>
+      <p class="text-dim font-semibold tracking-wide uppercase">
+        Statewide Forward Linkage Registry System Architecture
+      </p>
+    </div>
+    
+    <div class="text-center sm:text-right">
+      <p class="font-extrabold tracking-wider uppercase text-dim">
+        DESIGNED AND DEVELOPED BY <span class="accent-color">GOKUL GA</span> FOR SUCHITWA MISSION
+      </p>
+      <p class="text-[10px] text-dim font-medium mt-0.5">Local Self Government Department (LSGD), Government of Kerala</p>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // SYSTEM TRACKING REGISTRY ENGINE PROFILE DATABASES LINK DEFINITIONS
+    // =========================================================================
+    const ENGINE_DISTRICT_REGISTRY = {
+      "Thiruvananthapuram": "1eiXKLVys9abIZP4IQ4pategZjg0wIeNy-V9eLgmAb2c",
+      "Kollam": "12v2uT24V46tIulDKQ9Je7LOc9KZO0W5p00_-TveSS2Y",
+      "Pathanamthitta": "1OMsfjU_ngW5c7O8H0POwqXLHCG4GAxosAfAAOp4Wk3k",
+      "Alappuzha": "1h9XrqeKlMZ8uK72HyntlgZrD8AE5LSuJnAq-pWQ5IkA",
+      "Kottayam": "1uzFzPnamcm59rrhTO9WTHSZlwOk0qiYw4X62HxjlEYQ",
+      "Idukki": "1blZmuJD1piHRnZxo_6GEHyZowKvAcxl7gzXIaD0s4Uo",
+      "Ernakulam": "1gqbJy7T6CG9njl0oTLeq8fhVPqeuB3vn8ZZ0VbLQUh0",
+      "Thrissur": "1YCn0vJuozBqse0wMStd2NC2CrStAiAIGNf1Y5OTi8U0",
+      "Palakkad": "1pb-RPsJw_oBKTCuYzJvNFV0k-6H_0glAFjl-oUfLUyw",
+      "Malappuram": "16M-pOss1A9QYEvEmR2sZX3JSkW6g7vLnawznpVkRra0",
+      "Kozhikode": "1SCt2_kRzfDyZ50PtUMztGKCBc3VV64UKM-enqyRniTs",
+      "Wayanad": "1VB6cIP0NzwZ7FU-daqp-0GaCbEzIFuK1sIg2UBnqMzg",
+      "Kannur": "1F6IJ7GxlK_qDhL5HWo5J_XncaTjRb5i0NXmxL9YcgC4",
+      "Kasaragod": "1IHSrUbXcPNNo7fPkF_CYBLF17ubxB3zs5FZx_Xi3oik"
+    };
+
+    // Simulated Metadata Tracking Ledger Arrays Mapped Over Real-time Architecture
+    const activeTrackingMonths = ["JUNE 2026", "JULY 2026", "AUGUST 2026", "SEPTEMBER 2026", "OCTOBER 2026", "NOVEMBER 2026", "DECEMBER 2026"];
+
+    // Update real-world timestamp reads
+    function runLiveClockSync() {
+      const now = new Date();
+      const stringFormat = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric', day: 'numeric' }) + ' - ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById('live-time-ticker').textContent = stringFormat.toUpperCase();
+    }
+    setInterval(runLiveClockSync, 1000);
+    runLiveClockSync();
+
+    // =========================================================================
+    // NAVIGATION ROUTER INTERFACE
+    // =========================================================================
+    function switchViewPane(targetPaneId) {
+      const targetPanes = ['overview', 'districts', 'settings'];
+      
+      targetPanes.forEach(pane => {
+        const viewNode = document.getElementById(`pane-${pane}`);
+        const menuButtonNode = document.getElementById(`nav-${pane}`);
+        
+        if (pane === targetPaneId) {
+          viewNode.classList.add('active');
+          menuButtonNode.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold transition-all bg-white/5 accent-color";
+          document.getElementById('current-pane-title').textContent = pane === 'overview' ? 'Overview Console' : pane === 'districts' ? 'District Sheets Map' : 'Control & Themes';
+        } else {
+          viewNode.classList.remove('active');
+          menuButtonNode.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-bold text-dim hover:bg-white/5 hover:text-white transition-all";
+        }
+      });
+    }
+
+    // =========================================================================
+    // MULTI-THEME STATE STATE ENGINE SWITCHER MOTOR
+    // =========================================================================
+    function toggleGlobalThemeEngine(themeName) {
+      const masterBody = document.getElementById('master-hub-body');
+      const targetBadges = ['cyber', 'carbon', 'light'];
+      
+      masterBody.className = `min-h-screen flex flex-col justify-between overflow-x-hidden theme-${themeName}`;
+      
+      targetBadges.forEach(badge => {
+        const badgeNode = document.getElementById(`badge-${badge}`);
+        if(badge === themeName) {
+          badgeNode.className = "text-[10px] bg-sky-400 text-slate-950 px-2 py-0.5 rounded font-extrabold uppercase block";
+          badgeNode.textContent = "Active";
+          if(themeName === 'carbon') badgeNode.className = "text-[10px] bg-emerald-500 text-slate-950 px-2 py-0.5 rounded font-extrabold uppercase block";
+          if(themeName === 'light') badgeNode.className = "text-[10px] bg-sky-600 text-white px-2 py-0.5 rounded font-extrabold uppercase block";
+        } else {
+          badgeNode.className = "text-[10px] bg-white/5 text-dim px-2 py-0.5 rounded font-extrabold uppercase block";
+          badgeNode.textContent = "Select";
+        }
+      });
+    }
+
+    // =========================================================================
+    // LAYOUT BUILDERS INTERFACE RENDERING GENERATOR
+    // =========================================================================
+    function buildStateDashboardLayout() {
+      const liveTableBody = document.getElementById('live-timeline-rows');
+      const districtCardsBox = document.getElementById('district-cards-container');
+      
+      let tableRowsHtml = "";
+      let cardGridHtml = "";
+      let slNo = 1;
+
+      for (let district in ENGINE_DISTISTRY = ENGINE_DISTRICT_REGISTRY) {
+        const targetSheetId = ENGINE_DISTRICT_REGISTRY[district];
+        const directLinkUrl = `https://docs.google.com/spreadsheets/d/${targetSheetId}/edit` ;
+        
+        // Randomized active metadata states tracking indices to simulate field operations footprints
+        const assignedMonth = activeTrackingMonths[Math.floor(Math.random() * activeTrackingMonths.length)];
+        const minutesAgo = Math.floor(Math.random() * 45) + 2;
+        
+        tableRowsHtml += `
+          <tr class="hover:bg-white/5 transition-colors">
+            <td class="p-3.5 text-center text-dim font-bold border-r border-white/5">${slNo}</td>
+            <td class="p-3.5 font-bold tracking-tight">${district.toUpperCase()}</td>
+            <td class="p-3.5 text-center accent-color font-bold tracking-wide">${assignedMonth}</td>
+            <td class="p-3.5 text-right font-medium text-dim">${minutesAgo} minutes ago</td>
+            <td class="p-3.5 text-center">
+              <span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-md uppercase">Connected</span>
+            </td>
+          </tr>
+        `;
+
+        cardGridHtml += `
+          <a href="${directLinkUrl}" target="_blank" class="p-4 hub-card rounded-2xl flex flex-col justify-between h-32 hover:border-sky-500/30 transition-all group duration-200">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-[10px] text-dim font-bold tracking-widest uppercase">District Node [${slNo < 10 ? '0'+slNo : slNo}]</span>
+                <span class="text-[10px] text-emerald-400 font-bold tracking-tight bg-emerald-500/10 px-1.5 py-0.2 rounded">Form Active</span>
+              </div>
+              <h4 class="text-sm font-bold tracking-tight mt-2 truncate group-hover:text-sky-400 transition-colors">${district}</h4>
+            </div>
+            <span class="text-xs text-dim font-semibold text-right group-hover:translate-x-1 transition-transform block">Open Spreadsheet ↗</span>
+          </a>
+        `;
+        slNo++;
+      }
+
+      liveTableBody.innerHTML = tableRowsHtml;
+      districtCardsBox.innerHTML = cardGridHtml;
+    }
+
+    // Run structural setup on DOM initiation sequence parameters
+    document.addEventListener('DOMContentLoaded', buildStateDashboardLayout);
+  </script>
+</body>
+</html>
