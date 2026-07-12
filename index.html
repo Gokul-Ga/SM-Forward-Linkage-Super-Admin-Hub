@@ -299,52 +299,61 @@
     // =========================================================================
     // LAYOUT BUILDERS INTERFACE RENDERING GENERATOR
     // =========================================================================
-    function buildStateDashboardLayout() {
-      const liveTableBody = document.getElementById('live-timeline-rows');
-      const districtCardsBox = document.getElementById('district-cards-container');
-      
-      let tableRowsHtml = "";
-      let cardGridHtml = "";
-      let slNo = 1;
+   async function buildStateDashboardLayout() {
+  const MASTER_API_URL = "https://script.google.com/macros/s/AKfycbyaybizmA69k2qTevwnChu3hPjrgUz5i5QUMQbHrnhkzESMcZI94XFY4PCvGqhAEQcU/exec";
+  const liveTableBody = document.getElementById('live-timeline-rows');
+  const districtCardsBox = document.getElementById('district-cards-container');
+  
+  // 1. Fetch real-time sync data
+  let syncData = {};
+  try {
+    const response = await fetch(MASTER_API_URL);
+    syncData = await response.json();
+  } catch (e) {
+    console.error("Sync data fetch failed:", e);
+  }
+  
+  let tableRowsHtml = "";
+  let cardGridHtml = "";
+  let slNo = 1;
 
-      for (let district in ENGINE_DISTISTRY = ENGINE_DISTRICT_REGISTRY) {
-        const targetSheetId = ENGINE_DISTRICT_REGISTRY[district];
-        const directLinkUrl = `https://docs.google.com/spreadsheets/d/${targetSheetId}/edit` ;
-        
-        // Randomized active metadata states tracking indices to simulate field operations footprints
-        const assignedMonth = activeTrackingMonths[Math.floor(Math.random() * activeTrackingMonths.length)];
-        const minutesAgo = Math.floor(Math.random() * 45) + 2;
-        
-        tableRowsHtml += `
-          <tr class="hover:bg-white/5 transition-colors">
-            <td class="p-3.5 text-center text-dim font-bold border-r border-white/5">${slNo}</td>
-            <td class="p-3.5 font-bold tracking-tight">${district.toUpperCase()}</td>
-            <td class="p-3.5 text-center accent-color font-bold tracking-wide">${assignedMonth}</td>
-            <td class="p-3.5 text-right font-medium text-dim">${minutesAgo} minutes ago</td>
-            <td class="p-3.5 text-center">
-              <span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-md uppercase">Connected</span>
-            </td>
-          </tr>
-        `;
+  for (let district in ENGINE_DISTRICT_REGISTRY) {
+    const targetSheetId = ENGINE_DISTRICT_REGISTRY[district];
+    const directLinkUrl = `https://docs.google.com/spreadsheets/d/${targetSheetId}/edit`;
+    
+    // Use real data if available, fallback to "Syncing..."
+    const lastSync = syncData[district] || "Initializing...";
+    
+    tableRowsHtml += `
+      <tr class="hover:bg-white/5 transition-colors">
+        <td class="p-3.5 text-center text-dim font-bold border-r border-white/5">${slNo}</td>
+        <td class="p-3.5 font-bold tracking-tight">${district.toUpperCase()}</td>
+        <td class="p-3.5 text-center accent-color font-bold tracking-wide">JULY 2026</td>
+        <td class="p-3.5 text-right font-medium text-dim">${lastSync}</td>
+        <td class="p-3.5 text-center">
+          <span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-md uppercase">Live</span>
+        </td>
+      </tr>
+    `;
 
-        cardGridHtml += `
-          <a href="${directLinkUrl}" target="_blank" class="p-4 hub-card rounded-2xl flex flex-col justify-between h-32 hover:border-sky-500/30 transition-all group duration-200">
-            <div>
-              <div class="flex justify-between items-start">
-                <span class="text-[10px] text-dim font-bold tracking-widest uppercase">District Node [${slNo < 10 ? '0'+slNo : slNo}]</span>
-                <span class="text-[10px] text-emerald-400 font-bold tracking-tight bg-emerald-500/10 px-1.5 py-0.2 rounded">Form Active</span>
-              </div>
-              <h4 class="text-sm font-bold tracking-tight mt-2 truncate group-hover:text-sky-400 transition-colors">${district}</h4>
-            </div>
-            <span class="text-xs text-dim font-semibold text-right group-hover:translate-x-1 transition-transform block">Open Spreadsheet ↗</span>
-          </a>
-        `;
-        slNo++;
-      }
+    cardGridHtml += `
+      <a href="${directLinkUrl}" target="_blank" class="p-4 hub-card rounded-2xl flex flex-col justify-between h-32 hover:border-sky-500/30 transition-all group duration-200">
+        <div>
+          <div class="flex justify-between items-start">
+            <span class="text-[10px] text-dim font-bold tracking-widest uppercase">Node [${slNo < 10 ? '0'+slNo : slNo}]</span>
+            <span class="text-[10px] text-emerald-400 font-bold tracking-tight bg-emerald-500/10 px-1.5 py-0.2 rounded">Active</span>
+          </div>
+          <h4 class="text-sm font-bold tracking-tight mt-2 truncate group-hover:text-sky-400 transition-colors">${district}</h4>
+        </div>
+        <span class="text-xs text-dim font-semibold text-right group-hover:translate-x-1 transition-transform block">Access Sheet ↗</span>
+      </a>
+    `;
+    slNo++;
+  }
 
-      liveTableBody.innerHTML = tableRowsHtml;
-      districtCardsBox.innerHTML = cardGridHtml;
-    }
+  liveTableBody.innerHTML = tableRowsHtml;
+  districtCardsBox.innerHTML = cardGridHtml;
+}
 
     // Run structural setup on DOM initiation sequence parameters
     document.addEventListener('DOMContentLoaded', buildStateDashboardLayout);
