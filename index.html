@@ -6,9 +6,11 @@
   <title>FL-Control Center </title>
   <link rel="icon" type="image/png" href="https://suchitwamission.org/public/img/logo/fav.svg" sizes="32x32"> 
   
+  <!-- Tailwind & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
+  <!-- Phosphor Icons (High-End Icon Library) -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   
   <style>
@@ -68,13 +70,16 @@
 </head>
 <body id="app-viewport" class="layout-gaming min-h-screen relative flex antialiased">
 
+  <!-- Ambient Glow Backgrounds -->
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
     <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] accent-glow animate-glow rounded-full blur-3xl"></div>
     <div class="absolute bottom-1/4 right-1/4 w-[800px] h-[800px] accent-glow animate-glow rounded-full blur-3xl" style="animation-delay: -2s;"></div>
   </div>
 
+  <!-- SIDEBAR CONTROL RAIL -->
   <aside id="app-sidebar" class="w-24 border-r border-white/5 flex flex-col items-center py-8 justify-between z-10 shrink-0 select-none bg-black/20 backdrop-blur-md">
     <div class="flex flex-col items-center gap-10 w-full">
+      <!-- Suchitwa Mission Official Logo -->
       <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 p-2 shadow-lg">
         <img src="SM%20LOGO.png" alt="Suchitwa Mission Logo" class="brand-logo-static" onerror="this.src='https://suchitwamission.org/public/img/logo/fav.svg'" sizes="32x32">
       </div>
@@ -86,11 +91,11 @@
         </button>
         <button onclick="switchPage('network')" id="nav-network" class="w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group">
           <i class="ph-fill ph-map-trifold text-2xl group-hover:scale-110 transition-transform"></i>
-          <span class="text-[9px] tracking-tight uppercase">Net Map</span>
+          <span class="text-[9px] tracking-tight uppercase">DATABASE</span>
         </button>
         <button onclick="switchPage('ledger')" id="nav-ledger" class="w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group">
           <i class="ph-fill ph-ranking text-2xl group-hover:scale-110 transition-transform"></i>
-          <span class="text-[9px] tracking-tight uppercase">Ledger</span>
+          <span class="text-[9px] tracking-tight uppercase">DISTRICTS SUMMARY</span>
         </button>
         <button onclick="switchPage('themes')" id="nav-themes" class="w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group">
           <i class="ph-fill ph-paint-brush-broad text-2xl group-hover:scale-110 transition-transform"></i>
@@ -104,8 +109,10 @@
     </div>
   </aside>
 
+  <!-- WORKSPACE FRAMEWAY -->
   <div class="flex-1 flex flex-col z-10 overflow-x-hidden min-w-0">
     
+    <!-- HEADER -->
     <header class="h-24 border-b border-white/5 flex justify-between items-center px-12 select-none shrink-0 bg-black/10 backdrop-blur-sm">
       <div>
         <h1 id="app-title-text" class="text-3xl font-black tracking-tighter uppercase italic">Overview Engine</h1>
@@ -122,8 +129,10 @@
 
     <main class="flex-1 p-12 overflow-y-auto min-h-0" id="main-portal-view">
       
+      <!-- VIEW 1: OVERVIEW CONTROL BOARD -->
       <div id="page-overview" class="space-y-8 page-container animate-fade-in">
         
+        <!-- Connected Statewide Balance sheet -->
         <div class="hud-card p-10 relative overflow-hidden group">
           <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-white/10 transition-colors"></div>
           
@@ -132,13 +141,13 @@
               <span class="text-[11px] font-bold tracking-widest uppercase opacity-50 flex items-center gap-2">
                 <i class="ph-fill ph-chart-line-up"></i> System Aggregates
               </span>
-              <h3 class="text-2xl font-bold tracking-tight mt-1">SWM - FL Statewide Consolidated Balance Sheet</h3>
+              <h3 class="text-2xl font-bold tracking-tight mt-1">SWM - FL Statewide Consolidated Data</h3>
             </div>
             <div class="flex items-center gap-3 z-20 relative">
               <div class="px-4 py-1.5 bg-white/5 rounded-lg border border-white/10 font-mono text-xs opacity-80 flex items-center gap-2 shadow-inner">
                 <i class="ph-fill ph-clock"></i> LIVE CONSOLE
               </div>
-              <button onclick="window.open('URL_HERE', '_blank')" class="px-4 py-1.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg text-[10px] uppercase font-bold tracking-widest flex items-center gap-2 hover:bg-emerald-500/30 transition-colors cursor-pointer shadow-lg">
+              <button onclick="window.open('https://gokul-ga.github.io/SM-Forward-Linkage-Dashboard/', '_blank')" class="px-4 py-1.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg text-[10px] uppercase font-bold tracking-widest flex items-center gap-2 hover:bg-emerald-500/30 transition-colors cursor-pointer shadow-lg">
                 <i class="ph-bold ph-arrow-square-out text-sm"></i> OPEN DASHBOARD
               </button>
             </div>
@@ -163,8 +172,9 @@
           </div>
         </div>
 
+        <!-- Infrastructure Controller Shortcut Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="window.open('URL_HERE', '_blank')">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="window.open('https://script.google.com/home/projects/1zwi_T-NU4cGJ8V8lqEy0C5nqDc3myVoYgxSz8yJnD1Fw4nDAfKpn0I_3/edit', '_blank')">
             <div class="flex justify-between items-start">
               <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 group-hover:text-emerald-400 transition-colors">
                 <i class="ph-fill ph-sliders text-2xl"></i>
@@ -173,11 +183,11 @@
             </div>
             <div>
               <h4 class="font-bold text-[15px] tracking-tight group-hover:text-emerald-400 transition-colors flex items-center gap-1">District Controller <i class="ph-bold ph-arrow-up-right text-xs opacity-50 group-hover:opacity-100"></i></h4>
-              <p class="text-[11px] opacity-50 mt-1">Real-time data ingestion pipelines</p>
+              <p class="text-[11px] opacity-50 mt-1">Real-Time Data Ingestion Pipelines</p>
             </div>
           </div>
 
-          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="window.open('URL_HERE', '_blank')">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="window.open('https://script.google.com/home/projects/1p1ixGvOb6MlN-Pszz2Nb1dnE1ZhsnHoOB-EscyqXXpq_feyIj-skwvjV/edit', '_blank')">
             <div class="flex justify-between items-start">
               <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-blue-500/20 group-hover:text-blue-400 transition-colors">
                 <i class="ph-fill ph-code-block text-2xl"></i>
@@ -186,11 +196,11 @@
             </div>
             <div>
               <h4 class="font-bold text-[15px] tracking-tight group-hover:text-blue-400 transition-colors flex items-center gap-1">Dashboard Engine <i class="ph-bold ph-arrow-up-right text-xs opacity-50 group-hover:opacity-100"></i></h4>
-              <p class="text-[11px] opacity-50 mt-1">Calculates running analytical matrix</p>
+              <p class="text-[11px] opacity-50 mt-1">Calculates Running Analytical Matrix</p>
             </div>
           </div>
 
-          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="window.open('URL_HERE', '_blank')">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="window.open('https://docs.google.com/spreadsheets/d/126gvf9S0YqXW3DUf9JtL-ev8N1yP4nFWOkb2a7wYNOM/edit?usp=sharing', '_blank')">
             <div class="flex justify-between items-start">
               <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-amber-500/20 group-hover:text-amber-400 transition-colors">
                 <i class="ph-fill ph-database text-2xl"></i>
@@ -199,7 +209,7 @@
             </div>
             <div>
               <h4 class="font-bold text-[15px] tracking-tight group-hover:text-amber-400 transition-colors flex items-center gap-1">Statewide Master DB <i class="ph-bold ph-arrow-up-right text-xs opacity-50 group-hover:opacity-100"></i></h4>
-              <p class="text-[11px] opacity-50 mt-1">Central transactional database cluster</p>
+              <p class="text-[11px] opacity-50 mt-1">Central Database Cluster</p>
             </div>
           </div>
 
@@ -212,18 +222,23 @@
             </div>
             <div>
               <h4 class="font-bold text-[15px] tracking-tight group-hover:text-purple-400 transition-colors">District Sheets Map</h4>
-              <p class="text-[11px] opacity-50 mt-1">14 Decentralized production nodes</p>
+              <p class="text-[11px] opacity-50 mt-1">14 Decentralized Production Nodes</p>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- VIEW 2: PRODUCTION NET MAP NODE TUNNELS -->
       <div id="page-network" class="hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 page-container" id="network-map-grid-container">
-        </div>
+        <!-- Renders dynamically cleanly without hardcoded subheader blocks -->
+      </div>
 
+      <!-- VIEW 3: REGIONAL PERFORMANCE STANDINGS LEDGER BOARD -->
       <div id="page-ledger" class="hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 page-container" id="ledger-cards-container">
-        </div>
+        <!-- Live calculated data lists stream here -->
+      </div>
 
+      <!-- VIEW 4: VISUAL PLUG THEME ENGINES SWITCHER -->
       <div id="page-themes" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6 page-container">
         <div onclick="applyVisualLayout('gaming')" class="hud-card p-8 cursor-pointer hover:border-emerald-500/50 hover:shadow-lg transition-all flex items-start gap-6 group">
           <div class="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">
@@ -268,11 +283,13 @@
 
     </main>
 
+    <!-- FOOTER FRAMEWORK -->
     <footer class="h-24 border-t border-white/5 flex items-center justify-between px-12 z-10 shrink-0 select-none bg-black/20 backdrop-blur-md">
       <div class="flex items-center gap-5">
         
         <div class="w-24 h-24 flex items-center justify-center hover:scale-110 transform transition duration-300 overflow-hidden">
-          <img src="GOKUL20GA.png" alt="GA Logo" class="brand-logo-static" onerror="this.src='https://gokul-ga.github.io/SM-Forward-Linkage-Super-Admin-Hub/GOKUL%20%20GA.png'">
+          <!-- Using standard URL encoding %20 for space -->
+          <img src="GOKUL%20GA.png" alt="GA Logo" class="brand-logo-static" onerror="this.src='https://gokul-ga.github.io/SM-Forward-Linkage-Super-Admin-Hub/GOKUL%20GA.png'">
         </div>
 
         <div>
@@ -287,6 +304,7 @@
 
   </div>
 
+  <!-- APPLICATION COMPUTE OPERATIONS ENGINE SCRIPT -->
   <script>
     const DISTRICT_REGISTRY = {
       "Thiruvananthapuram": "1eiXKLVys9abIZP4IQ4pategZjg0wIeNy-V9eLgmAb2c",
@@ -343,6 +361,13 @@
       ledgerContainer.innerHTML = "";
       networkContainer.innerHTML = "";
 
+      // Gradient arrays for the repeating card styles (Gold, Silver, Bronze vibes)
+      const cardStyles = [
+        { bg: "bg-gradient-to-br from-[#302612] to-black/20", ring: "border-amber-400", bar: "bg-amber-400" }, 
+        { bg: "bg-gradient-to-br from-[#1e2532] to-black/20", ring: "border-slate-300", bar: "bg-slate-300" }, 
+        { bg: "bg-gradient-to-br from-[#301c15] to-black/20", ring: "border-orange-600", bar: "bg-orange-600" }  
+      ];
+
       Object.keys(DISTRICT_REGISTRY).forEach((district, index) => {
         const fileId = DISTRICT_REGISTRY[district];
         const displayId = fileId.substring(0, 6) + "..." + fileId.substring(fileId.length - 4);
@@ -365,6 +390,9 @@
         grandTotalRejects += rejWeightTonnes;
         let cumulativeYieldTonnes = recWeightTonnes + rejWeightTonnes;
 
+        // Fetch cyclical style configuration
+        const cardTheme = cardStyles[index % 3];
+
         // Render Network Cards
         networkContainer.innerHTML += `
           <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg transition-all group cursor-pointer" onclick="window.open('${targetEditLink}', '_blank')">
@@ -380,40 +408,39 @@
           </div>
         `;
 
-        // Render NEW Redesigned Leaderboard Ledger Cards (matching 2nd Image Layout)
+        // Render UPDATED Redesigned Leaderboard Ledger Cards (Matching Image 1 perfectly)
         ledgerContainer.innerHTML += `
-          <div class="hud-card p-6 hover:-translate-y-1 hover:shadow-xl transition-all group flex flex-col justify-between gap-6 cursor-default">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-4">
-                <div class="relative">
-                  <div class="w-12 h-12 rounded-full border-2 border-white/10 flex items-center justify-center font-bold text-lg theme-accent-text group-hover:border-white/30 transition-colors bg-white/5">
-                    ${district.substring(0,2).toUpperCase()}
-                  </div>
-                  <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-[#1a1a1a] rounded-full text-[9px] flex items-center justify-center font-mono border border-white/20 text-white shadow-md">
-                    ${index + 1}
-                  </div>
+          <div class="hud-card relative overflow-hidden p-6 hover:-translate-y-1 hover:shadow-xl transition-all group flex flex-col justify-between gap-5 cursor-default ${cardTheme.bg} border-white/5">
+            <!-- Bottom Indicator Line -->
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/4 h-1 ${cardTheme.bar} rounded-t-md opacity-80"></div>
+            
+            <div class="flex items-center gap-4 relative z-10">
+              <div class="relative">
+                <div class="w-14 h-14 rounded-full border-[2.5px] ${cardTheme.ring} flex items-center justify-center font-bold text-lg text-white bg-black/40 shadow-inner">
+                  ${district.substring(0,2).toUpperCase()}
                 </div>
-                <div>
-                  <h4 class="font-bold text-[16px] uppercase tracking-widest group-hover:text-white transition-colors">${district}</h4>
-                  <p class="text-[9px] opacity-40 font-mono mt-1 flex items-center gap-1"><i class="ph-fill ph-clock"></i> ${lastUpdatedTimestamp}</p>
+                <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-[#262626] rounded-full text-[10px] flex items-center justify-center font-bold font-mono border border-white/20 text-white shadow-md">
+                  ${index + 1}
                 </div>
               </div>
-              <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-30 group-hover:opacity-100 group-hover:bg-amber-500/10 group-hover:text-amber-500 transition-colors">
-                <i class="ph-fill ph-trophy text-xl"></i>
+              <div>
+                <h4 class="font-bold text-[16px] uppercase tracking-wide text-white">${district}</h4>
+                <p class="text-[10px] opacity-50 font-mono mt-0.5 flex items-center gap-1"><i class="ph-fill ph-clock"></i> ${lastUpdatedTimestamp}</p>
               </div>
             </div>
-            <div class="grid grid-cols-3 gap-2 border-t border-white/10 pt-5 text-center">
+            
+            <div class="grid grid-cols-3 gap-2 pt-2 text-center relative z-10">
               <div>
-                <p class="text-[9px] uppercase font-bold tracking-widest opacity-40 mb-1">Total</p>
-                <p class="font-mono text-base font-bold text-white">${cumulativeYieldTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} <span class="text-[9px] opacity-50 font-sans tracking-normal">T</span></p>
+                <p class="text-[10px] uppercase font-bold tracking-widest opacity-50 mb-1">Total</p>
+                <p class="font-mono text-[15px] font-bold text-white">${cumulativeYieldTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})}</p>
               </div>
               <div>
-                <p class="text-[9px] uppercase font-bold tracking-widest opacity-40 mb-1">Recyclable</p>
-                <p class="font-mono text-base font-bold text-emerald-400">${recWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} <span class="text-[9px] opacity-50 font-sans tracking-normal">T</span></p>
+                <p class="text-[10px] uppercase font-bold tracking-widest opacity-50 mb-1">Recyclable</p>
+                <p class="font-mono text-[15px] font-bold text-emerald-400">${recWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})}</p>
               </div>
               <div>
-                <p class="text-[9px] uppercase font-bold tracking-widest opacity-40 mb-1">Reject</p>
-                <p class="font-mono text-base font-bold text-rose-400">${rejWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} <span class="text-[9px] opacity-50 font-sans tracking-normal">T</span></p>
+                <p class="text-[10px] uppercase font-bold tracking-widest opacity-50 mb-1">Reject</p>
+                <p class="font-mono text-[15px] font-bold text-rose-400">${rejWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})}</p>
               </div>
             </div>
           </div>
@@ -455,7 +482,7 @@
       const layoutTitles = { 
         overview: "Overview Engine", 
         network: "Decentralized Production Map", 
-        ledger: "District Metrics Standings Matrix", 
+        ledger: "District Metrics", 
         themes: "System Visual Switcher" 
       };
       document.getElementById("app-title-text").innerText = layoutTitles[pageId];
