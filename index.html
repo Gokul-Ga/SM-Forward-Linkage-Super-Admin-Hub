@@ -8,6 +8,477 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
   <style>
+    * { transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease, box-shadow 0.4s ease; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+    .animate-glow { animation: pulseGlow 3s infinite alternate; }
+    @keyframes pulseGlow { 0% { opacity: 0.3; } 100% { opacity: 0.7; } }
+    
+    /* -------------------------------------------------------------------------
+       VISUAL STRUCTURAL ENGINES
+       ------------------------------------------------------------------------- */
+    
+    /* 1. Tactical Cyber Mode (Call of Duty Concept) */
+    .layout-gaming { background: #0b0d0c; color: #f8fafc; }
+    .layout-gaming .hud-card { background: rgba(16, 20, 18, 0.75); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 14px; font-family: 'Space Grotesk', sans-serif; }
+    .layout-gaming .accent-glow { background: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, transparent 70%); }
+    .layout-gaming .sidebar-target { border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.08); color: #10b981; }
+    .layout-gaming .stat-bar-lifted { background: linear-gradient(90deg, #3b82f6, #6366f1); }
+    .layout-gaming .stat-bar-recyclable { background: #10b981; }
+    .layout-gaming .stat-bar-reject { background: #f43f5e; }
+
+    /* 2. Neuro-Fin (NeuroBank Concept Matching Image 2) */
+    .layout-finance { background: #0c0e12; color: #e2e8f0; }
+    .layout-finance .hud-card { background: rgba(18, 22, 32, 0.85); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 24px; backdrop-filter: blur(20px); box-shadow: inset 0 1px 1px rgba(255,255,255,0.05); }
+    .layout-finance .accent-glow { background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%); }
+    .layout-finance .sidebar-target { background: #2563eb; color: #fff; box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); border-radius: 16px; }
+    .layout-finance .stat-bar-lifted { background: #3b82f6; }
+    .layout-finance .stat-bar-recyclable { background: #10b981; }
+    .layout-finance .stat-bar-reject { background: #ef4444; }
+    
+    /* 3. Executive Pro (Clean Minimalist Slate) */
+    .layout-executive { background: #f8fafc; color: #0f172a; }
+    .layout-executive .hud-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03); }
+    .layout-executive .accent-glow { display: none; }
+    .layout-executive .sidebar-target { background: #0f172a; color: #ffffff; border-radius: 12px; }
+    
+    /* 4. Pure AMOLED (True Dark High-Contrast) */
+    .layout-amoled { background: #000000; color: #ffffff; }
+    .layout-amoled .hud-card { background: #090909; border: 1px solid #262626; border-radius: 8px; }
+    .layout-amoled .accent-glow { background: radial-gradient(circle at center, rgba(234, 179, 8, 0.08) 0%, transparent 70%); }
+    .layout-amoled .sidebar-target { border-bottom: 2px solid #eab308; color: #eab308; }
+    
+    /* 5. Fluid Vibrant Elements (Hyper-Color Colorful Glassmorphism) */
+    .layout-vibrant { background: linear-gradient(135deg, #090d16 0%, #141233 50%, #240a33 100%); color: #ffffff; }
+    .layout-vibrant .hud-card { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 28px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+    .layout-vibrant .accent-glow { background: linear-gradient(45deg, rgba(219,39,119,0.15) 0%, rgba(79,70,229,0.15) 100%); mix-blend-mode: screen; }
+    .layout-vibrant .sidebar-target { background: linear-gradient(90deg, #db2777, #6366f1); border-radius: 18px; box-shadow: 0 0 15px rgba(219, 39, 119, 0.4); }
+    .layout-vibrant .stat-bar-lifted { background: linear-gradient(90deg, #ec4899, #8b5cf6); }
+    .layout-vibrant .stat-bar-recyclable { background: linear-gradient(90deg, #10b981, #06b6d4); }
+    .layout-vibrant .stat-bar-reject { background: linear-gradient(90deg, #f43f5e, #fb923c); }
+  </style>
+</head>
+<body id="app-viewport" class="layout-gaming min-h-screen relative flex antialiased">
+
+  <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] accent-glow animate-glow rounded-full"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] accent-glow animate-glow rounded-full" style="animation-delay: -1.5s;"></div>
+  </div>
+
+  <aside id="app-sidebar" class="w-24 border-r border-white/5 flex flex-col items-center py-8 justify-between z-10 shrink-0 select-none bg-black/10">
+    <div class="flex flex-col items-center gap-10 w-full">
+      <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center font-black text-xl tracking-tighter text-emerald-400">
+        SM
+      </div>
+      
+      <nav class="flex flex-col gap-4 w-full px-2">
+        <button onclick="switchPage('overview')" id="nav-overview" class="sidebar-target w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition group">
+          <span>📊</span>
+          <span class="text-[8px] tracking-tight opacity-80">Overview</span>
+        </button>
+        <button onclick="switchPage('network')" id="nav-network" class="w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group">
+          <span>🗺️</span>
+          <span class="text-[8px] tracking-tight opacity-80">Net Map</span>
+        </button>
+        <button onclick="switchPage('ledger')" id="nav-ledger" class="w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group">
+          <span>🏆</span>
+          <span class="text-[8px] tracking-tight opacity-80">Ledger</span>
+        </button>
+        <button onclick="switchPage('themes')" id="nav-themes" class="w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group">
+          <span>🎨</span>
+          <span class="text-[8px] tracking-tight opacity-80">Engine</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="text-[9px] font-black tracking-widest select-none opacity-40 uppercase rotate-180 mb-4" style="writing-mode: vertical-rl;">
+      STATE SYSTEM RUNTIME
+    </div>
+  </aside>
+
+  <div class="flex-1 flex flex-col z-10 overflow-x-hidden min-w-0">
+    
+    <header class="h-20 border-b border-white/5 flex justify-between items-center px-12 select-none shrink-0 bg-black/5">
+      <div>
+        <h1 id="app-title-text" class="text-2xl font-black tracking-tighter uppercase italic">Overview Engine</h1>
+        <p class="text-[10px] text-emerald-500 font-bold uppercase tracking-widest mt-0.5" id="app-subtitle-text">Operational Control Center</p>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs font-medium">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="opacity-70 tracking-wide uppercase font-bold text-[10px]">PIPELINE CORE ONLINE</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 p-12 overflow-y-auto min-h-0" id="main-portal-view">
+      
+      <div id="page-overview" class="space-y-8 page-container">
+        
+        <div class="hud-card p-8 bg-gradient-to-br from-white/[0.01] to-transparent relative overflow-hidden">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <span class="text-[10px] font-bold tracking-widest uppercase opacity-40">Operational Aggregates</span>
+              <h3 class="text-xl font-bold tracking-tight mt-1">SWM - FL Statewide Consolidated Balance Sheet</h3>
+            </div>
+            <div class="px-3 py-1 bg-white/5 rounded-lg border border-white/10 font-mono text-xs opacity-60">JULY 2026 CONSOLE</div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+            <div class="space-y-2">
+              <p class="text-xs uppercase font-bold opacity-40 tracking-wider">📊 Total Waste Lifted</p>
+              <div class="text-4xl font-black tracking-tight" id="bal-total-waste">0 <span class="text-sm font-normal opacity-50">Kg</span></div>
+              <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden"><div class="stat-bar-lifted h-full w-[100%]" id="bar-total-waste"></div></div>
+            </div>
+            <div class="space-y-2">
+              <p class="text-xs uppercase font-bold opacity-40 tracking-wider text-emerald-400">♻️ Total Recyclables</p>
+              <div class="text-4xl font-black tracking-tight text-emerald-400" id="bal-recyclables">0 <span class="text-sm font-normal opacity-50">Kg</span></div>
+              <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden"><div class="stat-bar-recyclable h-full w-[0%]" id="bar-recyclables"></div></div>
+            </div>
+            <div class="space-y-2">
+              <p class="text-xs uppercase font-bold opacity-40 tracking-wider text-rose-400">⚠️ Total Rejects Mapped</p>
+              <div class="text-4xl font-black tracking-tight text-rose-400" id="bal-rejects">0 <span class="text-sm font-normal opacity-50">Kg</span></div>
+              <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden"><div class="stat-bar-reject h-full w-[0%]" id="bar-rejects"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-emerald-500/40">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg">⚙️</div>
+              <span class="text-[9px] font-bold px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded">ACTIVE</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm tracking-tight group-hover:text-emerald-400 transition-colors">District Wise Sheet Controller</h4>
+              <p class="text-[10px] opacity-40 mt-1">Manages real-time data ingestion pipelines</p>
+            </div>
+          </div>
+
+          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-indigo-500/40">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-lg">📊</div>
+              <span class="text-[9px] font-bold px-2 py-0.5 bg-indigo-500/10 text-indigo-400 rounded">ACTIVE</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm tracking-tight group-hover:text-indigo-400 transition-colors">Dashboard Script Engine</h4>
+              <p class="text-[10px] opacity-40 mt-1">Calculates running analytical matrix fields</p>
+            </div>
+          </div>
+
+          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-amber-500/40">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-lg">🗄️</div>
+              <span class="text-[9px] font-bold px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded">LIVE</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm tracking-tight group-hover:text-amber-400 transition-colors">Statewide Master Database</h4>
+              <p class="text-[10px] opacity-40 mt-1">Central transactional database cluster</p>
+            </div>
+          </div>
+
+          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-pink-500/40" onclick="switchPage('network')">
+            <div class="flex justify-between items-start">
+              <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-lg">am🗺️</div>
+              <span class="text-[9px] font-bold px-2 py-0.5 bg-pink-500/10 text-pink-400 rounded">INDEXED</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm tracking-tight group-hover:text-pink-400 transition-colors">District Sheets Map</h4>
+              <p class="text-[10px] opacity-40 mt-1">14 Decentralized nodes connected</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="page-network" class="hidden space-y-8 page-container">
+        <div>
+          <h3 class="text-xl font-bold tracking-tight">Decentralized Production Hubs</h3>
+          <p class="text-xs opacity-50 mt-1">Direct read/write access tunnels into individual district data sheets</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="network-map-grid-container">
+          </div>
+      </div>
+
+      <div id="page-ledger" class="hidden space-y-6 page-container">
+        <div>
+          <h3 class="text-xl font-bold tracking-tight">District Metrics Standings Matrix</h3>
+          <p class="text-xs opacity-50 mt-1">Comparative breakdown analytics organized across municipal yield rates</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ledger-cards-container">
+          </div>
+      </div>
+
+      <div id="page-themes" class="hidden space-y-6 page-container">
+        <div>
+          <h3 class="text-xl font-bold tracking-tight">System Layout & Identity Switcher</h3>
+          <p class="text-xs opacity-50 mt-1">Transform spatial alignments, boundaries, and visual styling blocks instantly</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div onclick="applyVisualLayout('gaming')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-emerald-500/40 space-y-3">
+            <div class="text-3xl">🪖</div>
+            <h4 class="font-bold text-sm uppercase">Tactical Cyber Mode</h4>
+            <p class="text-xs opacity-40">Dark canvas with high-visibility tactical grid components inspired by modern tactical game layers.</p>
+          </div>
+
+          <div onclick="applyVisualLayout('finance')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-blue-500/40 space-y-3">
+            <div class="text-3xl">🧠</div>
+            <h4 class="font-bold text-sm uppercase">Neuro-Fin Intelligence Mode</h4>
+            <p class="text-xs opacity-40">Sleek, layered finance layout with dense card networks matching modern high-fidelity banking frames.</p>
+          </div>
+
+          <div onclick="applyVisualLayout('executive')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-slate-500/40 space-y-3">
+            <div class="text-3xl">🏢</div>
+            <h4 class="font-bold text-sm uppercase">Executive Professional</h4>
+            <p class="text-xs opacity-40">Clean Slate high-contrast corporate workspace layout engine maximizing daytime administrative clarity.</p>
+          </div>
+
+          <div onclick="applyVisualLayout('amoled')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-yellow-500/40 space-y-3">
+            <div class="text-3xl">⬛</div>
+            <h4 class="font-bold text-sm uppercase">Pure AMOLED Interface</h4>
+            <p class="text-xs opacity-40">True pitch-black mode optimizing presentation contrast levels to their maximum.</p>
+          </div>
+
+          <div onclick="applyVisualLayout('vibrant')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-purple-500/40 space-y-3">
+            <div class="text-3xl">🔮</div>
+            <h4 class="font-bold text-sm uppercase">Fluid Vibrant Elements</h4>
+            <p class="text-xs opacity-40">Colorful glassmorphism backed by dense dynamic multi-gradients for premium operational presentation.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="h-24 border-t border-white/5 flex items-center justify-between px-12 z-10 shrink-0 select-none bg-black/20">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 bg-white rounded-xl shadow-2xl p-1 flex items-center justify-center border border-white/20 hover:scale-105 transform transition duration-200">
+          <img src="GOKUL GA.png" alt="GA Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='<span class=\"text-black font-black text-xs\">GA</span>'">
+        </div>
+        <div>
+          <p class="text-xs font-black tracking-tight uppercase">Designed and Developed by Gokul GA</p>
+          <p class="text-[9px] uppercase tracking-widest text-emerald-500 font-bold mt-0.5">Suchitwa Mission • LSGD Kerala</p>
+        </div>
+      </div>
+      <div class="text-right text-[10px] opacity-40 font-mono">
+        v4.2.0-STABLE BRANCH
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Decentralized District Registry Storage Target Objects
+    const DISTRICT_REGISTRY = {
+      "Thiruvananthapuram": "1eiXKLVys9abIZP4IQ4pategZjg0wIeNy-V9eLgmAb2c",
+      "Kollam": "12v2uT24V46tIulDKQ9Je7LOc9KZO0W5p00_-TveSS2Y",
+      "Pathanamthitta": "1OMsfjU_ngW5c7O8H0POwqXLHCG4GAxosAfAAOp4Wk3k",
+      "Alappuzha": "1h9XrqeKlMZ8uK72HyntlgZrD8AE5LSuJnAq-pWQ5IkA",
+      "Kottayam": "1uzFzPnamcm59rrhTO9WTHSZlwOk0qiYw4X62HxjlEYQ",
+      "Idukki": "1blZmuJD1piHRnZxo_6GEHyZowKvAcxl7gzXIaD0s4Uo",
+      "Ernakulam": "1gqbJy7T6CG9njl0oTLeq8fhVPqeuB3vn8ZZ0VbLQUh0",
+      "Thrissur": "1YCn0vJuozBqse0wMStd2NC2CrStAiAIGNf1Y5OTi8U0",
+      "Palakkad": "1pb-RPsJw_oBKTCuYzJvNFV0k-6H_0glAFjl-oUfLUyw",
+      "Malappuram": "16M-pOss1A9QYEvEmR2sZX3JSkW6g7vLnawznpVkRra0",
+      "Kozhikode": "1SCt2_kRzfDyZ50PtUMztGKCBc3VV64UKM-enqyRniTs",
+      "Wayanad": "1VB6cIP0NzwZ7FU-daqp-0GaCbEzIFuK1sIg2UBnqMzg",
+      "Kannur": "1F6IJ7GxlK_qDhL5HWo5J_XncaTjRb5i0NXmxL9YcgC4",
+      "Kasaragod": "1IHSrUbXcPNNo7fPkF_CYBLF17ubxB3zs5FZx_Xi3oik"
+    };
+
+    // Target Master App Script Ingestion API Bridge Address
+    const MASTER_INGESTION_API = "https://script.google.com/macros/s/AKfycbyaybizmA69k2qTevwnChu3hPjrgUz5i5QUMQbHrnhkzESMcZI94XFY4PCvGqhAEQcU/exec";
+
+    // Mock performance matrix generation variables matching production balance scopes
+    const MOCK_PERFORMANCE_METRICS = {
+      "Thiruvananthapuram": { recyclables: 12450, rejects: 350 },
+      "Kollam": { recyclables: 4820, rejects: 180 },
+      "Pathanamthitta": { recyclables: 2100, rejects: 90 },
+      "Alappuzha": { recyclables: 3400, rejects: 110 },
+      "Kottayam": { recyclables: 2900, rejects: 80 },
+      "Idukki": { recyclables: 1100, rejects: 40 },
+      "Ernakulam": { recyclables: 5340, rejects: 210 },
+      "Thrissur": { recyclables: 0, rejects: 0 },
+      "Palakkad": { recyclables: 0, rejects: 0 },
+      "Malappuram": { recyclables: 0, rejects: 0 },
+      "Kozhikode": { recyclables: 0, rejects: 0 },
+      "Wayanad": { recyclables: 0, rejects: 0 },
+      "Kannur": { recyclables: 0, rejects: 0 },
+      "Kasaragod": { recyclables: 0, rejects: 0 }
+    };
+
+    /**
+     * Re-calculates and binds live transactional totals across balance components
+     */
+    function processStatewideCalculations() {
+      let totalRecyclables = 0;
+      let totalRejects = 0;
+
+      Object.keys(MOCK_PERFORMANCE_METRICS).forEach(district => {
+        totalRecyclables += MOCK_PERFORMANCE_METRICS[district].recyclables;
+        totalRejects += MOCK_PERFORMANCE_METRICS[district].rejects;
+      });
+
+      let totalWaste = totalRecyclables + totalRejects;
+
+      // Update UI Presentation Elements
+      document.getElementById("bal-total-waste").innerHTML = `${totalWaste.toLocaleString('en-IN')} <span class="text-sm font-normal opacity-50">Kg</span>`;
+      document.getElementById("bal-recyclables").innerHTML = `${totalRecyclables.toLocaleString('en-IN')} <span class="text-sm font-normal opacity-50">Kg</span>`;
+      document.getElementById("bal-rejects").innerHTML = `${totalRejects.toLocaleString('en-IN')} <span class="text-sm font-normal opacity-50">Kg</span>`;
+      
+      // Scale metric percentage presentation lines dynamically
+      if (totalWaste > 0) {
+        let recPercent = (totalRecyclables / totalWaste) * 100;
+        let rejPercent = (totalRejects / totalWaste) * 100;
+        document.getElementById("bar-recyclables").style.width = `${recPercent}%`;
+        document.getElementById("bar-rejects").style.width = `${rejPercent}%`;
+      }
+    }
+
+    /**
+     * Builds modular district profile mapping nodes dynamically into grid containers
+     */
+    function buildNetworkInfrastructureView() {
+      const container = document.getElementById("network-map-grid-container");
+      container.innerHTML = "";
+      
+      Object.keys(DISTRICT_REGISTRY).forEach(district => {
+        const fileId = DISTRICT_REGISTRY[district];
+        const displayId = fileId.substring(0, 6) + "..." + fileId.substring(fileId.length - 4);
+        const editLink = `https://docs.google.com/spreadsheets/d/${fileId}/edit`;
+        
+        container.innerHTML += `
+          <div class="hud-card p-5 flex flex-col justify-between h-40 hover:scale-[1.03] hover:border-blue-500/30 group cursor-pointer" onclick="window.open('${editLink}', '_blank')">
+            <div>
+              <div class="flex justify-between items-start">
+                <span class="text-[16px]">📍</span>
+                <span class="text-[9px] text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">CONNECTED</span>
+              </div>
+              <h4 class="font-bold text-sm mt-3 tracking-tight group-hover:text-blue-400 transition-colors uppercase">${district}</h4>
+              <p class="font-mono text-[9px] opacity-40 mt-1">NODE REF: ${displayId}</p>
+            </div>
+            <div class="text-right text-[10px] font-bold tracking-tight opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all">OPEN DATA SHEET ↗</div>
+          </div>
+        `;
+      });
+    }
+
+    /**
+     * Builds the Regional Performance Ledger components matching Leaderboard patterns (Image 4 Layout)
+     */
+    function buildRegionalPerformanceLedger() {
+      const container = document.getElementById("ledger-cards-container");
+      container.innerHTML = "";
+
+      Object.keys(MOCK_PERFORMANCE_METRICS).forEach(district => {
+        const metrics = MOCK_PERFORMANCE_METRICS[district];
+        const combinedYield = metrics.recyclables + metrics.rejects;
+        
+        container.innerHTML += `
+          <div class="hud-card p-6 flex items-center justify-between hover:border-white/10 transition-all">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center font-bold text-sm text-blue-400 border border-white/5">
+                ${district.substring(0,2).toUpperCase()}
+              </div>
+              <div>
+                <h4 class="font-bold text-sm uppercase tracking-tight">${district}</h4>
+                <p class="text-[10px] opacity-40">Operational Body Context Matrix</p>
+              </div>
+            </div>
+            <div class="text-right flex items-center gap-6">
+              <div class="space-y-0.5">
+                <p class="text-[10px] font-bold text-emerald-400 font-mono">${metrics.recyclables.toLocaleString('en-IN')} Kg Recyclables</p>
+                <p class="text-[10px] font-bold text-rose-400 font-mono">${metrics.rejects.toLocaleString('en-IN')} Kg Rejects</p>
+              </div>
+              <div class="border-l border-white/10 pl-4 text-right">
+                <span class="text-[9px] uppercase font-bold tracking-wider opacity-30 block">Total Yield</span>
+                <span class="font-mono text-sm font-bold">${combinedYield.toLocaleString('en-IN')} Kg</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    /**
+     * Client View Router Tunnel Controller
+     */
+    function switchPage(pageId) {
+      document.querySelectorAll('.page-container').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`page-${pageId}`).classList.remove('hidden');
+      
+      document.querySelectorAll('#app-sidebar nav button').forEach(btn => {
+        btn.className = "w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group";
+      });
+      document.getElementById(`nav-${pageId}`).className = "sidebar-target w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition group";
+
+      const interfaceTitles = { 
+        overview: "Overview Engine", 
+        network: "Decentralized Production Map", 
+        ledger: "District Performance Ledger", 
+        themes: "System Visual Switcher" 
+      };
+      document.getElementById("app-title-text").innerText = interfaceTitles[pageId];
+    }
+
+    /**
+     * Global layout frame configuration class updater
+     */
+    function applyVisualLayout(themeClass) {
+      const viewport = document.getElementById("app-viewport");
+      viewport.className = "min-h-screen relative flex antialiased " + `layout-${themeClass}`;
+    }
+
+    // Thread initialization anchor
+    window.addEventListener('DOMContentLoaded', () => {
+      processStatewideCalculations();
+      buildNetworkInfrastructureView();
+      buildRegionalPerformanceLedger();
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suchitwa Mission Forward Linkage Super Admin Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
     /* Base Reset & Transitions */
     * { transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease, box-shadow 0.4s ease; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
@@ -398,4 +869,4 @@
     });
   </script>
 </body>
-</html>
+</html> -->
