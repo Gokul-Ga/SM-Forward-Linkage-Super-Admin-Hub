@@ -60,7 +60,6 @@
     <div class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] accent-glow animate-glow rounded-full" style="animation-delay: -1.5s;"></div>
   </div>
 
-  <!-- SIDEBAR CONTROL RAIL -->
   <aside id="app-sidebar" class="w-24 border-r border-white/5 flex flex-col items-center py-8 justify-between z-10 shrink-0 select-none bg-black/10">
     <div class="flex flex-col items-center gap-10 w-full">
       <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center font-black text-xl tracking-tighter text-emerald-400">
@@ -92,10 +91,8 @@
     </div>
   </aside>
 
-  <!-- WORKSPACE FRAMEWAY -->
   <div class="flex-1 flex flex-col z-10 overflow-x-hidden min-w-0">
     
-    <!-- SINGLE AUTHORITATIVE HEADBAR -->
     <header class="h-20 border-b border-white/5 flex justify-between items-center px-12 select-none shrink-0 bg-black/5">
       <div>
         <h1 id="app-title-text" class="text-2xl font-black tracking-tighter uppercase italic">Overview Engine</h1>
@@ -112,17 +109,15 @@
 
     <main class="flex-1 p-12 overflow-y-auto min-h-0" id="main-portal-view">
       
-      <!-- VIEW 1: OVERVIEW CONTROL BOARD -->
       <div id="page-overview" class="space-y-8 page-container">
         
-        <!-- Connected Statewide Balance sheet -->
         <div class="hud-card p-8 bg-gradient-to-br from-white/[0.01] to-transparent relative overflow-hidden">
           <div class="flex justify-between items-start mb-6">
             <div>
               <span class="text-[10px] font-bold tracking-widest uppercase opacity-40">System Aggregates</span>
               <h3 class="text-xl font-bold tracking-tight mt-1">SWM - FL Statewide Consolidated Balance Sheet</h3>
             </div>
-            <div class="px-3 py-1 bg-white/5 rounded-lg border border-white/10 font-mono text-xs opacity-60">JULY 2026 STATUS</div>
+            <div class="px-3 py-1 bg-white/5 rounded-lg border border-white/10 font-mono text-xs opacity-60">LIVE CONSOLE</div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
@@ -144,7 +139,6 @@
           </div>
         </div>
 
-        <!-- Infrastructure Controller Shortcut Cards Matrix Row -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-emerald-500/40">
             <div class="flex justify-between items-start">
@@ -192,17 +186,12 @@
         </div>
       </div>
 
-      <!-- VIEW 2: PRODUCTION NET MAP NODE TUNNELS (Inner double headers clean stripped out) -->
       <div id="page-network" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 page-container" id="network-map-grid-container">
-        <!-- Renders dynamically cleanly without hardcoded subheader blocks -->
-      </div>
+        </div>
 
-      <!-- VIEW 3: REGIONAL PERFORMANCE STANDINGS LEDGER BOARD (Inner subheaders stripped out) -->
       <div id="page-ledger" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 page-container" id="ledger-cards-container">
-        <!-- Live calculated data lists stream here -->
-      </div>
+        </div>
 
-      <!-- VIEW 4: VISUAL PLUG THEME ENGINES SWITCHER -->
       <div id="page-themes" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 page-container">
         <div onclick="applyVisualLayout('gaming')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-emerald-500/40 space-y-3">
           <div class="text-3xl">🪖</div>
@@ -237,7 +226,6 @@
 
     </main>
 
-    <!-- FOOTER FRAMEWORK - COMPLETELY RESOLVED LOGO SYNTAX LAYER -->
     <footer class="h-24 border-t border-white/5 flex items-center justify-between px-12 z-10 shrink-0 select-none bg-black/20">
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 bg-white rounded-xl shadow-2xl p-1 flex items-center justify-center border border-white/20 hover:scale-105 transform transition duration-200 overflow-hidden">
@@ -255,7 +243,6 @@
 
   </div>
 
-  <!-- APPLICATION COMPUTE OPERATIONS ENGINE SCRIPT -->
   <script>
     const DISTRICT_REGISTRY = {
       "Thiruvananthapuram": "1eiXKLVys9abIZP4IQ4pategZjg0wIeNy-V9eLgmAb2c",
@@ -325,16 +312,28 @@
         const displayId = fileId.substring(0, 6) + "..." + fileId.substring(fileId.length - 4);
         const targetEditLink = `https://docs.google.com/spreadsheets/d/${fileId}/edit`;
         
-        // Match timestamps or logs mapped out from live payload fields
-        let lastUpdatedTimestamp = operationalDatabaseLogs[district] || "No Sync Log";
+        // Grab the live payload safely
+        let rawData = operationalDatabaseLogs[district];
         
-        // Generate contextual weight scales dynamically mapped from operational outputs
-        let recWeight = lastUpdatedTimestamp !== "No Sync Log" ? Math.floor(Math.random() * 8000) + 4000 : 0;
-        let rejWeight = lastUpdatedTimestamp !== "No Sync Log" ? Math.floor(Math.random() * 600) + 100 : 0;
+        // Ensure graceful fallback structure if data object is incomplete or legacy string
+        let liveData = { timestamp: "OFFLINE", recyclables: 0, rejects: 0 };
+        if (rawData) {
+            if (typeof rawData === 'string') {
+                liveData.timestamp = rawData; 
+            } else {
+                liveData = rawData;
+            }
+        }
         
-        grandTotalRecyclables += recWeight;
-        grandTotalRejects += rejWeight;
-        let cumulativeYield = recWeight + rejWeight;
+        let lastUpdatedTimestamp = liveData.timestamp || "OFFLINE";
+        
+        // Convert Kg to Tonnes by dividing by 1000
+        let recWeightTonnes = (liveData.recyclables || 0) / 1000;
+        let rejWeightTonnes = (liveData.rejects || 0) / 1000;
+        
+        grandTotalRecyclables += recWeightTonnes;
+        grandTotalRejects += rejWeightTonnes;
+        let cumulativeYieldTonnes = recWeightTonnes + rejWeightTonnes;
 
         // Render District Deep Link Net Map Card Elements cleanly
         networkContainer.innerHTML += `
@@ -342,7 +341,7 @@
             <div>
               <div class="flex justify-between items-start">
                 <span class="text-[16px]">📍</span>
-                <span class="text-[9px] ${lastUpdatedTimestamp !== 'No Sync Log' ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-400 bg-white/5'} font-bold px-1.5 py-0.5 rounded uppercase">${lastUpdatedTimestamp !== 'No Sync Log' ? 'ACTIVE' : 'OFFLINE'}</span>
+                <span class="text-[9px] ${lastUpdatedTimestamp !== 'OFFLINE' && lastUpdatedTimestamp !== 'No Sync' ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-400 bg-white/5'} font-bold px-1.5 py-0.5 rounded uppercase">${lastUpdatedTimestamp !== 'OFFLINE' && lastUpdatedTimestamp !== 'No Sync' ? 'ACTIVE' : 'OFFLINE'}</span>
               </div>
               <h4 class="font-bold text-sm mt-3 tracking-tight group-hover:text-blue-400 transition-colors uppercase">${district}</h4>
               <p class="font-mono text-[9px] opacity-40 mt-1">NODE: ${displayId}</p>
@@ -351,7 +350,7 @@
           </div>
         `;
 
-        // Render Ledger Standings Components dynamically matching Image 4 specifications
+        // Render Ledger Standings Components dynamically (formatted to 2 decimal places for Tonnes readability)
         ledgerContainer.innerHTML += `
           <div class="hud-card p-6 flex items-center justify-between hover:border-white/10 transition-all">
             <div class="flex items-center gap-4">
@@ -365,12 +364,12 @@
             </div>
             <div class="text-right flex items-center gap-6">
               <div class="space-y-0.5">
-                <p class="text-[10px] font-bold text-emerald-400 font-mono">${recWeight.toLocaleString('en-IN')} Kg Recyclables</p>
-                <p class="text-[10px] font-bold text-rose-400 font-mono">${rejWeight.toLocaleString('en-IN')} Kg Rejects</p>
+                <p class="text-[10px] font-bold text-emerald-400 font-mono">${recWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} Tonnes Recyclables</p>
+                <p class="text-[10px] font-bold text-rose-400 font-mono">${rejWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} Tonnes Rejects</p>
               </div>
               <div class="border-l border-white/10 pl-4 text-right">
                 <span class="text-[9px] uppercase font-bold tracking-wider opacity-30 block">Total Yield</span>
-                <span class="font-mono text-sm font-bold">${cumulativeYield.toLocaleString('en-IN')} Kg</span>
+                <span class="font-mono text-sm font-bold">${cumulativeYieldTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} Tonnes</span>
               </div>
             </div>
           </div>
@@ -382,16 +381,19 @@
     }
 
     function fallbackToContextCalculations() {
-      // Graceful calculation handler if local network blocks initial script handshakes
-      updateBalanceSheetUI(32100, 1200);
+      // Graceful calculation handler if local network blocks initial script handshakes (Using fallback dummy metrics mapped in Tonnes)
+      updateBalanceSheetUI(32.10, 1.20);
       populateActiveInterfaceViews();
     }
 
     function updateBalanceSheetUI(rec, rej) {
       let total = rec + rej;
-      document.getElementById("bal-total-waste").innerHTML = `${total.toLocaleString('en-IN')} <span class="text-sm font-normal opacity-50">Kg</span>`;
-      document.getElementById("bal-recyclables").innerHTML = `${rec.toLocaleString('en-IN')} <span class="text-sm font-normal opacity-50">Kg</span>`;
-      document.getElementById("bal-rejects").innerHTML = `${rej.toLocaleString('en-IN')} <span class="text-sm font-normal opacity-50">Kg</span>`;
+      const formatOptions = { maximumFractionDigits: 2 };
+
+      // Update structural HTML string injection to apply Tonnes notation
+      document.getElementById("bal-total-waste").innerHTML = `${total.toLocaleString('en-IN', formatOptions)} <span class="text-sm font-normal opacity-50">Tonnes</span>`;
+      document.getElementById("bal-recyclables").innerHTML = `${rec.toLocaleString('en-IN', formatOptions)} <span class="text-sm font-normal opacity-50">Tonnes</span>`;
+      document.getElementById("bal-rejects").innerHTML = `${rej.toLocaleString('en-IN', formatOptions)} <span class="text-sm font-normal opacity-50">Tonnes</span>`;
       
       if (total > 0) {
         document.getElementById("bar-recyclables").style.width = `${(rec / total) * 100}%`;
