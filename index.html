@@ -4,245 +4,299 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Suchitwa Mission Forward Linkage Super Admin Hub</title>
+  
+  <!-- Tailwind & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
+  <!-- Phosphor Icons (High-End Icon Library) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
   <style>
-    * { transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.2s ease, box-shadow 0.4s ease; }
+    * { transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease, box-shadow 0.4s ease; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-    .animate-glow { animation: pulseGlow 3s infinite alternate; }
-    @keyframes pulseGlow { 0% { opacity: 0.3; } 100% { opacity: 0.7; } }
+    .animate-glow { animation: pulseGlow 4s infinite alternate; }
+    @keyframes pulseGlow { 0% { opacity: 0.2; transform: scale(0.95); } 100% { opacity: 0.6; transform: scale(1.05); } }
     
-    /* 1. Tactical Cyber Mode (Call of Duty Concept Layout) */
+    /* -------------------------------------------------------------------------
+       1. TACTICAL CYBER MODE (Dark Green / Call of Duty Concept)
+       ------------------------------------------------------------------------- */
     .layout-gaming { background: #0b0d0c; color: #f8fafc; }
-    .layout-gaming .hud-card { background: rgba(16, 20, 18, 0.75); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 14px; font-family: 'Space Grotesk', sans-serif; }
-    .layout-gaming .accent-glow { background: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, transparent 70%); }
-    .layout-gaming .sidebar-target { border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.08); color: #10b981; }
-    .layout-gaming .stat-bar-lifted { background: linear-gradient(90deg, #3b82f6, #6366f1); }
+    .layout-gaming .hud-card { background: rgba(16, 20, 18, 0.85); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; font-family: 'Space Grotesk', sans-serif; }
+    .layout-gaming .accent-glow { background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%); }
+    .layout-gaming .sidebar-target { border-left: 4px solid #10b981; background: rgba(16, 185, 129, 0.1); color: #10b981; }
+    .layout-gaming .theme-accent-text { color: #10b981; }
+    .layout-gaming .stat-bar-lifted { background: linear-gradient(90deg, #3b82f6, #10b981); }
     .layout-gaming .stat-bar-recyclable { background: #10b981; }
     .layout-gaming .stat-bar-reject { background: #f43f5e; }
 
-    /* 2. Neuro-Fin (NeuroBank Concept Layout) */
-    .layout-finance { background: #0c0e12; color: #e2e8f0; }
-    .layout-finance .hud-card { background: rgba(18, 22, 32, 0.85); border: 1px solid rgba(59, 130, 246, 0.15); border-radius: 24px; backdrop-filter: blur(20px); }
-    .layout-finance .accent-glow { background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%); }
-    .layout-finance .sidebar-target { background: #2563eb; color: #fff; box-shadow: 0 0 20px rgba(37, 99, 235, 0.4); border-radius: 16px; }
-    .layout-finance .stat-bar-lifted { background: #3b82f6; }
-    .layout-finance .stat-bar-recyclable { background: #10b981; }
-    .layout-finance .stat-bar-reject { background: #ef4444; }
-    
-    /* 3. Executive Pro (Clean slate Mode) */
-    .layout-executive { background: #f8fafc; color: #0f172a; }
-    .layout-executive .hud-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03); }
-    .layout-executive .accent-glow { display: none; }
-    .layout-executive .sidebar-target { background: #0f172a; color: #ffffff; border-radius: 12px; }
-    
-    /* 4. Pure AMOLED Layout */
-    .layout-amoled { background: #000000; color: #ffffff; }
-    .layout-amoled .hud-card { background: #090909; border: 1px solid #262626; border-radius: 8px; }
-    .layout-amoled .accent-glow { background: radial-gradient(circle at center, rgba(234, 179, 8, 0.08) 0%, transparent 70%); }
-    .layout-amoled .sidebar-target { border-bottom: 2px solid #eab308; color: #eab308; }
-    
-    /* 5. Fluid Vibrant Elements Layout */
+    /* -------------------------------------------------------------------------
+       2. FLUID VIBRANT ELEMENTS (Colorful Glassmorphism)
+       ------------------------------------------------------------------------- */
     .layout-vibrant { background: linear-gradient(135deg, #090d16 0%, #141233 50%, #240a33 100%); color: #ffffff; }
-    .layout-vibrant .hud-card { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 28px; backdrop-filter: blur(20px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
-    .layout-vibrant .accent-glow { background: linear-gradient(45deg, rgba(219,39,119,0.15) 0%, rgba(79,70,229,0.15) 100%); mix-blend-mode: screen; }
-    .layout-vibrant .sidebar-target { background: linear-gradient(90deg, #db2777, #6366f1); border-radius: 18px; box-shadow: 0 0 15px rgba(219, 39, 119, 0.4); }
+    .layout-vibrant .hud-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 24px; backdrop-filter: blur(16px); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+    .layout-vibrant .accent-glow { background: linear-gradient(45deg, rgba(219,39,119,0.2) 0%, rgba(79,70,229,0.2) 100%); mix-blend-mode: screen; }
+    .layout-vibrant .sidebar-target { background: linear-gradient(90deg, #db2777, #6366f1); border-radius: 16px; box-shadow: 0 0 20px rgba(219, 39, 119, 0.4); color: #fff; }
+    .layout-vibrant .theme-accent-text { color: #c084fc; }
     .layout-vibrant .stat-bar-lifted { background: linear-gradient(90deg, #ec4899, #8b5cf6); }
     .layout-vibrant .stat-bar-recyclable { background: linear-gradient(90deg, #10b981, #06b6d4); }
     .layout-vibrant .stat-bar-reject { background: linear-gradient(90deg, #f43f5e, #fb923c); }
+
+    /* -------------------------------------------------------------------------
+       3. APEX LEADERBOARD (Dark Grey & Gold/Amber Concept)
+       ------------------------------------------------------------------------- */
+    .layout-apex { background: #111111; color: #eaeaea; }
+    .layout-apex .hud-card { background: #1a1a1a; border: 1px solid #333; border-radius: 20px; box-shadow: inset 0 1px 1px rgba(255,255,255,0.05); }
+    .layout-apex .accent-glow { background: radial-gradient(circle at center, rgba(245, 158, 11, 0.08) 0%, transparent 70%); }
+    .layout-apex .sidebar-target { background: #262626; border-right: 4px solid #f59e0b; color: #f59e0b; border-radius: 12px 0 0 12px; }
+    .layout-apex .theme-accent-text { color: #f59e0b; }
+    .layout-apex .stat-bar-lifted { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .layout-apex .stat-bar-recyclable { background: #34d399; }
+    .layout-apex .stat-bar-reject { background: #ef4444; }
+
+    /* -------------------------------------------------------------------------
+       4. NEURO-FIN INTELLIGENCE (Deep Blue Glass)
+       ------------------------------------------------------------------------- */
+    .layout-neuro { background: #07090e; color: #e2e8f0; }
+    .layout-neuro .hud-card { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 16px; backdrop-filter: blur(12px); }
+    .layout-neuro .accent-glow { background: radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%); }
+    .layout-neuro .sidebar-target { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; border-radius: 12px; }
+    .layout-neuro .theme-accent-text { color: #38bdf8; }
+    .layout-neuro .stat-bar-lifted { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+    .layout-neuro .stat-bar-recyclable { background: #10b981; }
+    .layout-neuro .stat-bar-reject { background: #f43f5e; }
   </style>
 </head>
 <body id="app-viewport" class="layout-gaming min-h-screen relative flex antialiased">
 
+  <!-- Ambient Glow Backgrounds -->
   <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] accent-glow animate-glow rounded-full"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] accent-glow animate-glow rounded-full" style="animation-delay: -1.5s;"></div>
+    <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] accent-glow animate-glow rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[800px] h-[800px] accent-glow animate-glow rounded-full blur-3xl" style="animation-delay: -2s;"></div>
   </div>
 
-  <aside id="app-sidebar" class="w-24 border-r border-white/5 flex flex-col items-center py-8 justify-between z-10 shrink-0 select-none bg-black/10">
+  <!-- SIDEBAR CONTROL RAIL -->
+  <aside id="app-sidebar" class="w-24 border-r border-white/5 flex flex-col items-center py-8 justify-between z-10 shrink-0 select-none bg-black/20 backdrop-blur-md">
     <div class="flex flex-col items-center gap-10 w-full">
-      <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center font-black text-xl tracking-tighter text-emerald-400">
-        SM
+      <!-- Suchitwa Mission Official Logo -->
+      <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 p-2 shadow-lg">
+        <img src="https://sanitation.kerala.gov.in/wp-content/uploads/2017/10/logo_sm.png" alt="SM Logo" class="w-full h-full object-contain filter drop-shadow-md" onerror="this.style.display='none'; this.parentNode.innerHTML='<span class=\'text-emerald-500 font-black text-xl\'>SM</span>'">
       </div>
       
       <nav class="flex flex-col gap-4 w-full px-2">
-        <button onclick="switchPage('overview')" id="nav-overview" class="sidebar-target w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition group">
-          <span>📊</span>
-          <span class="text-[8px] tracking-tight opacity-80">Overview</span>
+        <button onclick="switchPage('overview')" id="nav-overview" class="sidebar-target w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition group">
+          <i class="ph-fill ph-chart-polar text-2xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-[9px] tracking-tight opacity-90 uppercase">Overview</span>
         </button>
-        <button onclick="switchPage('network')" id="nav-network" class="w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group">
-          <span>🗺️</span>
-          <span class="text-[8px] tracking-tight opacity-80">Net Map</span>
+        <button onclick="switchPage('network')" id="nav-network" class="w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group">
+          <i class="ph-fill ph-map-trifold text-2xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-[9px] tracking-tight uppercase">Net Map</span>
         </button>
-        <button onclick="switchPage('ledger')" id="nav-ledger" class="w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group">
-          <span>🏆</span>
-          <span class="text-[8px] tracking-tight opacity-80">Ledger</span>
+        <button onclick="switchPage('ledger')" id="nav-ledger" class="w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group">
+          <i class="ph-fill ph-ranking text-2xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-[9px] tracking-tight uppercase">Ledger</span>
         </button>
-        <button onclick="switchPage('themes')" id="nav-themes" class="w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group">
-          <span>🎨</span>
-          <span class="text-[8px] tracking-tight opacity-80">Engine</span>
+        <button onclick="switchPage('themes')" id="nav-themes" class="w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group">
+          <i class="ph-fill ph-paint-brush-broad text-2xl group-hover:scale-110 transition-transform"></i>
+          <span class="text-[9px] tracking-tight uppercase">Engine</span>
         </button>
       </nav>
     </div>
 
-    <div class="text-[9px] font-black tracking-widest select-none opacity-40 uppercase rotate-180 mb-4" style="writing-mode: vertical-rl;">
+    <div class="text-[9px] font-black tracking-widest select-none opacity-30 uppercase rotate-180 mb-4" style="writing-mode: vertical-rl;">
       STATE SYSTEM RUNTIME
     </div>
   </aside>
 
+  <!-- WORKSPACE FRAMEWAY -->
   <div class="flex-1 flex flex-col z-10 overflow-x-hidden min-w-0">
     
-    <header class="h-20 border-b border-white/5 flex justify-between items-center px-12 select-none shrink-0 bg-black/5">
+    <!-- HEADER -->
+    <header class="h-24 border-b border-white/5 flex justify-between items-center px-12 select-none shrink-0 bg-black/10 backdrop-blur-sm">
       <div>
-        <h1 id="app-title-text" class="text-2xl font-black tracking-tighter uppercase italic">Overview Engine</h1>
-        <p class="text-[10px] text-emerald-500 font-bold uppercase tracking-widest mt-0.5" id="app-subtitle-text">Operational Control Center</p>
+        <h1 id="app-title-text" class="text-3xl font-black tracking-tighter uppercase italic">Overview Engine</h1>
+        <p class="text-[11px] theme-accent-text font-bold uppercase tracking-widest mt-1" id="app-subtitle-text">Operational Control Center</p>
       </div>
 
       <div class="flex items-center gap-6 text-xs font-medium">
-        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" id="status-pulse-node"></span>
-          <span class="opacity-70 tracking-wide uppercase font-bold text-[10px]" id="status-ticker-text">PIPELINE SYNCHRONIZED</span>
+        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-inner">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" id="status-pulse-node"></span>
+          <span class="opacity-80 tracking-widest uppercase font-bold text-[10px]" id="status-ticker-text">PIPELINE SYNCHRONIZED</span>
         </div>
       </div>
     </header>
 
     <main class="flex-1 p-12 overflow-y-auto min-h-0" id="main-portal-view">
       
-      <div id="page-overview" class="space-y-8 page-container">
+      <!-- VIEW 1: OVERVIEW CONTROL BOARD -->
+      <div id="page-overview" class="space-y-8 page-container animate-fade-in">
         
-        <div class="hud-card p-8 bg-gradient-to-br from-white/[0.01] to-transparent relative overflow-hidden">
-          <div class="flex justify-between items-start mb-6">
+        <!-- Connected Statewide Balance sheet -->
+        <div class="hud-card p-10 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20 group-hover:bg-white/10 transition-colors"></div>
+          
+          <div class="flex justify-between items-start mb-8 relative z-10">
             <div>
-              <span class="text-[10px] font-bold tracking-widest uppercase opacity-40">System Aggregates</span>
-              <h3 class="text-xl font-bold tracking-tight mt-1">SWM - FL Statewide Consolidated Balance Sheet</h3>
+              <span class="text-[11px] font-bold tracking-widest uppercase opacity-50 flex items-center gap-2">
+                <i class="ph-fill ph-chart-line-up"></i> System Aggregates
+              </span>
+              <h3 class="text-2xl font-bold tracking-tight mt-1">SWM - FL Statewide Consolidated Balance Sheet</h3>
             </div>
-            <div class="px-3 py-1 bg-white/5 rounded-lg border border-white/10 font-mono text-xs opacity-60">LIVE CONSOLE</div>
+            <div class="px-4 py-1.5 bg-white/5 rounded-lg border border-white/10 font-mono text-xs opacity-80 flex items-center gap-2 shadow-inner">
+              <i class="ph-fill ph-clock"></i> LIVE CONSOLE
+            </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
-            <div class="space-y-2">
-              <p class="text-xs uppercase font-bold opacity-40 tracking-wider">📊 Total Waste Lifted</p>
-              <div class="text-4xl font-black tracking-tight" id="bal-total-waste">Calculating...</div>
-              <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden"><div class="stat-bar-lifted h-full w-full" id="bar-total-waste"></div></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pt-4 relative z-10">
+            <div class="space-y-3">
+              <p class="text-[11px] uppercase font-bold opacity-50 tracking-widest flex items-center gap-2"><i class="ph-fill ph-trash text-lg"></i> Total Waste Lifted</p>
+              <div class="text-5xl font-black tracking-tight" id="bal-total-waste">---</div>
+              <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden shadow-inner"><div class="stat-bar-lifted h-full w-full" id="bar-total-waste"></div></div>
             </div>
-            <div class="space-y-2">
-              <p class="text-xs uppercase font-bold opacity-40 tracking-wider text-emerald-400">♻️ Total Recyclables</p>
-              <div class="text-4xl font-black tracking-tight text-emerald-400" id="bal-recyclables">Calculating...</div>
-              <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden"><div class="stat-bar-recyclable h-full w-0" id="bar-recyclables"></div></div>
+            <div class="space-y-3">
+              <p class="text-[11px] uppercase font-bold opacity-50 tracking-widest text-emerald-400 flex items-center gap-2"><i class="ph-fill ph-recycle text-lg"></i> Total Recyclables</p>
+              <div class="text-5xl font-black tracking-tight text-emerald-400" id="bal-recyclables">---</div>
+              <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden shadow-inner"><div class="stat-bar-recyclable h-full w-0 transition-all duration-1000" id="bar-recyclables"></div></div>
             </div>
-            <div class="space-y-2">
-              <p class="text-xs uppercase font-bold opacity-40 tracking-wider text-rose-400">⚠️ Total Rejects Mapped</p>
-              <div class="text-4xl font-black tracking-tight text-rose-400" id="bal-rejects">Calculating...</div>
-              <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden"><div class="stat-bar-reject h-full w-0" id="bar-rejects"></div></div>
+            <div class="space-y-3">
+              <p class="text-[11px] uppercase font-bold opacity-50 tracking-widest text-rose-400 flex items-center gap-2"><i class="ph-fill ph-warning-octagon text-lg"></i> Total Rejects Mapped</p>
+              <div class="text-5xl font-black tracking-tight text-rose-400" id="bal-rejects">---</div>
+              <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden shadow-inner"><div class="stat-bar-reject h-full w-0 transition-all duration-1000" id="bar-rejects"></div></div>
             </div>
           </div>
         </div>
 
+        <!-- Infrastructure Controller Shortcut Cards -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-emerald-500/40">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all">
             <div class="flex justify-between items-start">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-lg">⚙️</div>
-              <span class="text-[9px] font-bold px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded">ACTIVE</span>
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-500/20 group-hover:text-emerald-400 transition-colors">
+                <i class="ph-fill ph-sliders text-2xl"></i>
+              </div>
+              <span class="text-[9px] font-bold px-2 py-1 bg-white/10 rounded uppercase tracking-wider">ACTIVE</span>
             </div>
             <div>
-              <h4 class="font-bold text-sm tracking-tight group-hover:text-emerald-400 transition-colors">District Wise Sheet Controller</h4>
-              <p class="text-[10px] opacity-40 mt-1">Manages real-time data ingestion pipelines</p>
+              <h4 class="font-bold text-[15px] tracking-tight group-hover:text-emerald-400 transition-colors">District Controller</h4>
+              <p class="text-[11px] opacity-50 mt-1">Real-time data ingestion pipelines</p>
             </div>
           </div>
 
-          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-indigo-500/40">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all">
             <div class="flex justify-between items-start">
-              <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-lg">📊</div>
-              <span class="text-[9px] font-bold px-2 py-0.5 bg-indigo-500/10 text-indigo-400 rounded">ACTIVE</span>
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-blue-500/20 group-hover:text-blue-400 transition-colors">
+                <i class="ph-fill ph-code-block text-2xl"></i>
+              </div>
+              <span class="text-[9px] font-bold px-2 py-1 bg-white/10 rounded uppercase tracking-wider">ACTIVE</span>
             </div>
             <div>
-              <h4 class="font-bold text-sm tracking-tight group-hover:text-indigo-400 transition-colors">Dashboard Script Engine</h4>
-              <p class="text-[10px] opacity-40 mt-1">Calculates running analytical matrix fields</p>
+              <h4 class="font-bold text-[15px] tracking-tight group-hover:text-blue-400 transition-colors">Dashboard Script Engine</h4>
+              <p class="text-[11px] opacity-50 mt-1">Calculates running analytical matrix</p>
             </div>
           </div>
 
-          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-amber-500/40">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all">
             <div class="flex justify-between items-start">
-              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-lg">🗄️</div>
-              <span class="text-[9px] font-bold px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded">LIVE</span>
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-amber-500/20 group-hover:text-amber-400 transition-colors">
+                <i class="ph-fill ph-database text-2xl"></i>
+              </div>
+              <span class="text-[9px] font-bold px-2 py-1 bg-white/10 rounded uppercase tracking-wider">LIVE</span>
             </div>
             <div>
-              <h4 class="font-bold text-sm tracking-tight group-hover:text-amber-400 transition-colors">Statewide Master Database</h4>
-              <p class="text-[10px] opacity-40 mt-1">Central transactional database cluster</p>
+              <h4 class="font-bold text-[15px] tracking-tight group-hover:text-amber-400 transition-colors">Statewide Master DB</h4>
+              <p class="text-[11px] opacity-50 mt-1">Central transactional database cluster</p>
             </div>
           </div>
 
-          <div class="hud-card p-6 flex flex-col justify-between h-40 hover:scale-[1.02] cursor-pointer group hover:border-pink-500/40" onclick="switchPage('network')">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg cursor-pointer group transition-all" onclick="switchPage('network')">
             <div class="flex justify-between items-start">
-              <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-lg">🗺️</div>
-              <span class="text-[9px] font-bold px-2 py-0.5 bg-pink-500/10 text-pink-400 rounded">INDEXED</span>
+              <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-purple-500/20 group-hover:text-purple-400 transition-colors">
+                <i class="ph-fill ph-map-pin-line text-2xl"></i>
+              </div>
+              <span class="text-[9px] font-bold px-2 py-1 bg-white/10 rounded uppercase tracking-wider">INDEXED</span>
             </div>
             <div>
-              <h4 class="font-bold text-sm tracking-tight group-hover:text-pink-400 transition-colors">District Sheets Map</h4>
-              <p class="text-[10px] opacity-40 mt-1">14 Decentralized production sheets</p>
+              <h4 class="font-bold text-[15px] tracking-tight group-hover:text-purple-400 transition-colors">District Sheets Map</h4>
+              <p class="text-[11px] opacity-50 mt-1">14 Decentralized production nodes</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="page-network" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 page-container" id="network-map-grid-container">
-        </div>
+      <!-- VIEW 2: PRODUCTION NET MAP NODE TUNNELS -->
+      <div id="page-network" class="hidden grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 page-container" id="network-map-grid-container">
+        <!-- Renders dynamically cleanly without hardcoded subheader blocks -->
+      </div>
 
+      <!-- VIEW 3: REGIONAL PERFORMANCE STANDINGS LEDGER BOARD (Matches Image Layout) -->
       <div id="page-ledger" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 page-container" id="ledger-cards-container">
+        <!-- Live calculated data lists stream here -->
+      </div>
+
+      <!-- VIEW 4: VISUAL PLUG THEME ENGINES SWITCHER -->
+      <div id="page-themes" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6 page-container">
+        <div onclick="applyVisualLayout('gaming')" class="hud-card p-8 cursor-pointer hover:border-emerald-500/50 hover:shadow-lg transition-all flex items-start gap-6 group">
+          <div class="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">
+            <i class="ph-fill ph-crosshair text-3xl"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg uppercase tracking-wide">Tactical Cyber Mode</h4>
+            <p class="text-sm opacity-50 mt-2 leading-relaxed">Dark canvas layout with crisp green visibility borders, inspired by modern tactical interfaces.</p>
+          </div>
+        </div>
+        
+        <div onclick="applyVisualLayout('vibrant')" class="hud-card p-8 cursor-pointer hover:border-purple-500/50 hover:shadow-lg transition-all flex items-start gap-6 group">
+          <div class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform">
+            <i class="ph-fill ph-drop text-3xl"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg uppercase tracking-wide">Fluid Vibrant Elements</h4>
+            <p class="text-sm opacity-50 mt-2 leading-relaxed">Colorful glassmorphism presentation layer utilizing deep dynamic gradient configurations.</p>
+          </div>
         </div>
 
-      <div id="page-themes" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 page-container">
-        <div onclick="applyVisualLayout('gaming')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-emerald-500/40 space-y-3">
-          <div class="text-3xl">🪖</div>
-          <h4 class="font-bold text-sm uppercase">Tactical Cyber Mode</h4>
-          <p class="text-xs opacity-40">Dark canvas layout with crisp visibility borders matching reference graphics.</p>
+        <div onclick="applyVisualLayout('apex')" class="hud-card p-8 cursor-pointer hover:border-amber-500/50 hover:shadow-lg transition-all flex items-start gap-6 group">
+          <div class="w-14 h-14 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+            <i class="ph-fill ph-crown text-3xl"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg uppercase tracking-wide">Apex Leaderboard Mode</h4>
+            <p class="text-sm opacity-50 mt-2 leading-relaxed">Dark grey structured background with premium gold and amber data highlights.</p>
+          </div>
         </div>
 
-        <div onclick="applyVisualLayout('finance')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-blue-500/40 space-y-3">
-          <div class="text-3xl">🧠</div>
-          <h4 class="font-bold text-sm uppercase">Neuro-Fin Intelligence Mode</h4>
-          <p class="text-xs opacity-40">Frosted component boards built directly over fluid deep interface layers.</p>
-        </div>
-
-        <div onclick="applyVisualLayout('executive')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-slate-500/40 space-y-3">
-          <div class="text-3xl">🏢</div>
-          <h4 class="font-bold text-sm uppercase">Executive Professional Mode</h4>
-          <p class="text-xs opacity-40">Clean high-contrast daytime workspace canvas optimization.</p>
-        </div>
-
-        <div onclick="applyVisualLayout('amoled')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-yellow-500/40 space-y-3">
-          <div class="text-3xl">⬛</div>
-          <h4 class="font-bold text-sm uppercase">Pure AMOLED Canvas</h4>
-          <p class="text-xs opacity-40">True pitch black structural backgrounds maximizing boundary definition levels.</p>
-        </div>
-
-        <div onclick="applyVisualLayout('vibrant')" class="hud-card p-6 cursor-pointer border-2 border-transparent hover:border-purple-500/40 space-y-3">
-          <div class="text-3xl">🔮</div>
-          <h4 class="font-bold text-sm uppercase">Fluid Vibrant Elements Mode</h4>
-          <p class="text-xs opacity-40">Colorful glassmorphism presentation layer layout utilizing deep gradient configurations.</p>
+        <div onclick="applyVisualLayout('neuro')" class="hud-card p-8 cursor-pointer hover:border-sky-500/50 hover:shadow-lg transition-all flex items-start gap-6 group">
+          <div class="w-14 h-14 rounded-full bg-sky-500/10 flex items-center justify-center text-sky-400 group-hover:scale-110 transition-transform">
+            <i class="ph-fill ph-brain text-3xl"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg uppercase tracking-wide">Neuro-Fin Intelligence</h4>
+            <p class="text-sm opacity-50 mt-2 leading-relaxed">Frosted deep-blue component boards built directly over fluid analytic interface layers.</p>
+          </div>
         </div>
       </div>
 
     </main>
 
-    <footer class="h-24 border-t border-white/5 flex items-center justify-between px-12 z-10 shrink-0 select-none bg-black/20">
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 bg-white rounded-xl shadow-2xl p-1 flex items-center justify-center border border-white/20 hover:scale-105 transform transition duration-200 overflow-hidden">
-          <img src="GOKUL GA.png" alt="GA Logo" class="w-full h-full object-contain">
+    <!-- FOOTER FRAMEWORK - LOGO LAYER FIXED -->
+    <footer class="h-24 border-t border-white/5 flex items-center justify-between px-12 z-10 shrink-0 select-none bg-black/20 backdrop-blur-md">
+      <div class="flex items-center gap-5">
+        <!-- Using %20 to properly encode the space in the GitHub URL -->
+        <div class="w-12 h-12 bg-white rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.2)] p-1 flex items-center justify-center border border-white/20 hover:scale-110 transform transition duration-300 overflow-hidden">
+          <img src="GOKUL%20GA.png" alt="GA Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.parentNode.innerHTML='<span class=\'text-black font-black text-sm\'>GA</span>'">
         </div>
         <div>
-          <p class="text-xs font-black tracking-tight uppercase">Designed and Developed by Gokul GA</p>
-          <p class="text-[9px] uppercase tracking-widest text-emerald-500 font-bold mt-0.5">Suchitwa Mission • LSGD Kerala</p>
+          <p class="text-[13px] font-black tracking-tight uppercase">Designed and Developed by Gokul GA</p>
+          <p class="text-[10px] uppercase tracking-widest theme-accent-text font-bold mt-1">Suchitwa Mission • LSGD Kerala</p>
         </div>
       </div>
-      <div class="text-right text-[10px] opacity-40 font-mono">
-        v4.2.0-STABLE BRANCH
+      <div class="text-right text-[10px] opacity-40 font-mono tracking-widest flex items-center gap-2">
+        <i class="ph-fill ph-git-branch text-sm"></i> v4.2.0-STABLE
       </div>
     </footer>
 
   </div>
 
+  <!-- APPLICATION COMPUTE OPERATIONS ENGINE SCRIPT -->
   <script>
     const DISTRICT_REGISTRY = {
       "Thiruvananthapuram": "1eiXKLVys9abIZP4IQ4pategZjg0wIeNy-V9eLgmAb2c",
@@ -262,19 +316,14 @@
     };
 
     const MASTER_INGESTION_API = "https://script.google.com/macros/s/AKfycbyaybizmA69k2qTevwnChu3hPjrgUz5i5QUMQbHrnhkzESMcZI94XFY4PCvGqhAEQcU/exec";
-
-    // Global data runtime cache memory
     let operationalDatabaseLogs = {};
 
-    /**
-     * Triggers active structural async fetch logic directly onto deployment web app link
-     */
     async function executeLivePipelineDataSync() {
       const pulseNode = document.getElementById("status-pulse-node");
       const tickerText = document.getElementById("status-ticker-text");
       
       try {
-        pulseNode.className = "w-2 h-2 rounded-full bg-amber-500 animate-ping";
+        pulseNode.className = "w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping";
         tickerText.innerText = "REFRESHING INTERFACE DATA MATRIX...";
 
         const response = await fetch(MASTER_INGESTION_API);
@@ -282,17 +331,14 @@
         
         operationalDatabaseLogs = await response.json();
         
-        pulseNode.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+        pulseNode.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
         tickerText.innerText = "DATA ENGINE ONLINE • LIVE STATUS";
         
-        // Execute template render loops dynamically using fresh runtime payload logs
         populateActiveInterfaceViews();
       } catch (err) {
         console.error("Runtime Data Ingestion Exception:", err);
-        pulseNode.className = "w-2 h-2 rounded-full bg-rose-500";
+        pulseNode.className = "w-2.5 h-2.5 rounded-full bg-rose-500";
         tickerText.innerText = "PIPELINE SYNCHRONIZATION FAULT";
-        
-        // Fallback gracefully onto calculations using available contextual values if connection drops
         fallbackToContextCalculations();
       }
     }
@@ -312,22 +358,16 @@
         const displayId = fileId.substring(0, 6) + "..." + fileId.substring(fileId.length - 4);
         const targetEditLink = `https://docs.google.com/spreadsheets/d/${fileId}/edit`;
         
-        // Grab the live payload safely
         let rawData = operationalDatabaseLogs[district];
-        
-        // Ensure graceful fallback structure if data object is incomplete or legacy string
         let liveData = { timestamp: "OFFLINE", recyclables: 0, rejects: 0 };
         if (rawData) {
-            if (typeof rawData === 'string') {
-                liveData.timestamp = rawData; 
-            } else {
-                liveData = rawData;
-            }
+            if (typeof rawData === 'string') { liveData.timestamp = rawData; } 
+            else { liveData = rawData; }
         }
         
         let lastUpdatedTimestamp = liveData.timestamp || "OFFLINE";
         
-        // Convert Kg to Tonnes by dividing by 1000
+        // Convert Kg to Tonnes
         let recWeightTonnes = (liveData.recyclables || 0) / 1000;
         let rejWeightTonnes = (liveData.rejects || 0) / 1000;
         
@@ -335,53 +375,52 @@
         grandTotalRejects += rejWeightTonnes;
         let cumulativeYieldTonnes = recWeightTonnes + rejWeightTonnes;
 
-        // Render District Deep Link Net Map Card Elements cleanly
+        // Render Network Cards
         networkContainer.innerHTML += `
-          <div class="hud-card p-5 flex flex-col justify-between h-40 hover:scale-[1.03] hover:border-blue-500/30 group cursor-pointer" onclick="window.open('${targetEditLink}', '_blank')">
+          <div class="hud-card p-6 flex flex-col justify-between h-44 hover:-translate-y-1 hover:shadow-lg transition-all group cursor-pointer" onclick="window.open('${targetEditLink}', '_blank')">
             <div>
               <div class="flex justify-between items-start">
-                <span class="text-[16px]">📍</span>
-                <span class="text-[9px] ${lastUpdatedTimestamp !== 'OFFLINE' && lastUpdatedTimestamp !== 'No Sync' ? 'text-emerald-400 bg-emerald-500/10' : 'text-slate-400 bg-white/5'} font-bold px-1.5 py-0.5 rounded uppercase">${lastUpdatedTimestamp !== 'OFFLINE' && lastUpdatedTimestamp !== 'No Sync' ? 'ACTIVE' : 'OFFLINE'}</span>
+                <i class="ph-fill ph-map-pin text-2xl opacity-80 group-hover:text-blue-400 transition-colors"></i>
+                <span class="text-[9px] ${lastUpdatedTimestamp !== 'OFFLINE' && lastUpdatedTimestamp !== 'No Sync' ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20' : 'text-slate-400 bg-white/5 border border-white/10'} font-bold px-2 py-1 rounded uppercase tracking-wider">${lastUpdatedTimestamp !== 'OFFLINE' && lastUpdatedTimestamp !== 'No Sync' ? 'ACTIVE' : 'OFFLINE'}</span>
               </div>
-              <h4 class="font-bold text-sm mt-3 tracking-tight group-hover:text-blue-400 transition-colors uppercase">${district}</h4>
-              <p class="font-mono text-[9px] opacity-40 mt-1">NODE: ${displayId}</p>
+              <h4 class="font-bold text-[15px] mt-4 tracking-tight group-hover:text-blue-400 transition-colors uppercase">${district}</h4>
+              <p class="font-mono text-[10px] opacity-40 mt-1 flex items-center gap-1"><i class="ph-bold ph-hash"></i> ${displayId}</p>
             </div>
-            <div class="text-[9px] opacity-50 truncate font-mono">Sync: ${lastUpdatedTimestamp}</div>
+            <div class="text-[10px] opacity-50 truncate font-mono flex items-center gap-1"><i class="ph-bold ph-clock"></i> ${lastUpdatedTimestamp}</div>
           </div>
         `;
 
-        // Render Ledger Standings Components dynamically (formatted to 2 decimal places for Tonnes readability)
+        // Render Exact Leaderboard/Ledger Layout requested in Image
         ledgerContainer.innerHTML += `
-          <div class="hud-card p-6 flex items-center justify-between hover:border-white/10 transition-all">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center font-bold text-sm text-blue-400 border border-white/5">
+          <div class="hud-card p-5 flex items-center justify-between hover:border-white/20 transition-all group">
+            <div class="flex items-center gap-5">
+              <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center font-bold text-sm theme-accent-text border border-white/5 group-hover:bg-white/10 transition-colors">
                 ${district.substring(0,2).toUpperCase()}
               </div>
               <div>
-                <h4 class="font-bold text-sm uppercase tracking-tight">${district}</h4>
-                <p class="text-[9px] opacity-40 font-mono">Footprint: ${lastUpdatedTimestamp}</p>
+                <h4 class="font-bold text-sm uppercase tracking-widest">${district}</h4>
+                <p class="text-[10px] opacity-40 font-mono mt-1">Footprint: ${lastUpdatedTimestamp}</p>
               </div>
             </div>
-            <div class="text-right flex items-center gap-6">
-              <div class="space-y-0.5">
-                <p class="text-[10px] font-bold text-emerald-400 font-mono">${recWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} Tonnes Recyclables</p>
-                <p class="text-[10px] font-bold text-rose-400 font-mono">${rejWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} Tonnes Rejects</p>
+            <div class="text-right flex items-center gap-8">
+              <div class="space-y-1.5 text-right">
+                <p class="text-[11px] font-bold text-emerald-400 font-mono">${recWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} <span class="opacity-70 text-[9px] uppercase tracking-wider font-sans">Tonnes Recyclables</span></p>
+                <p class="text-[11px] font-bold text-rose-400 font-mono">${rejWeightTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} <span class="opacity-70 text-[9px] uppercase tracking-wider font-sans">Tonnes Rejects</span></p>
               </div>
-              <div class="border-l border-white/10 pl-4 text-right">
-                <span class="text-[9px] uppercase font-bold tracking-wider opacity-30 block">Total Yield</span>
-                <span class="font-mono text-sm font-bold">${cumulativeYieldTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} Tonnes</span>
+              <div class="border-l border-white/10 pl-6 text-right min-w-[120px]">
+                <span class="text-[9px] uppercase font-bold tracking-widest opacity-40 block mb-1">Total Yield</span>
+                <span class="font-mono text-xl font-bold text-white">${cumulativeYieldTonnes.toLocaleString('en-IN', {maximumFractionDigits: 2})} <span class="text-xs opacity-50 font-sans ml-1">Tonnes</span></span>
               </div>
             </div>
           </div>
         `;
       });
 
-      // Bind dynamic parameters smoothly onto the SWM Balance Sheet widgets
       updateBalanceSheetUI(grandTotalRecyclables, grandTotalRejects);
     }
 
     function fallbackToContextCalculations() {
-      // Graceful calculation handler if local network blocks initial script handshakes (Using fallback dummy metrics mapped in Tonnes)
+      // Mock Tonnes Data
       updateBalanceSheetUI(32.10, 1.20);
       populateActiveInterfaceViews();
     }
@@ -390,10 +429,9 @@
       let total = rec + rej;
       const formatOptions = { maximumFractionDigits: 2 };
 
-      // Update structural HTML string injection to apply Tonnes notation
-      document.getElementById("bal-total-waste").innerHTML = `${total.toLocaleString('en-IN', formatOptions)} <span class="text-sm font-normal opacity-50">Tonnes</span>`;
-      document.getElementById("bal-recyclables").innerHTML = `${rec.toLocaleString('en-IN', formatOptions)} <span class="text-sm font-normal opacity-50">Tonnes</span>`;
-      document.getElementById("bal-rejects").innerHTML = `${rej.toLocaleString('en-IN', formatOptions)} <span class="text-sm font-normal opacity-50">Tonnes</span>`;
+      document.getElementById("bal-total-waste").innerHTML = `${total.toLocaleString('en-IN', formatOptions)} <span class="text-lg font-bold opacity-50">Tonnes</span>`;
+      document.getElementById("bal-recyclables").innerHTML = `${rec.toLocaleString('en-IN', formatOptions)} <span class="text-lg font-bold opacity-50">Tonnes</span>`;
+      document.getElementById("bal-rejects").innerHTML = `${rej.toLocaleString('en-IN', formatOptions)} <span class="text-lg font-bold opacity-50">Tonnes</span>`;
       
       if (total > 0) {
         document.getElementById("bar-recyclables").style.width = `${(rec / total) * 100}%`;
@@ -406,9 +444,9 @@
       document.getElementById(`page-${pageId}`).classList.remove('hidden');
       
       document.querySelectorAll('#app-sidebar nav button').forEach(btn => {
-        btn.className = "w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition opacity-60 hover:opacity-100 group";
+        btn.className = "w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition opacity-50 hover:opacity-100 hover:bg-white/5 group";
       });
-      document.getElementById(`nav-${pageId}`).className = "sidebar-target w-full h-14 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1 transition group";
+      document.getElementById(`nav-${pageId}`).className = "sidebar-target w-full h-16 rounded-xl flex flex-col items-center justify-center text-xs font-bold gap-1.5 transition group";
 
       const layoutTitles = { 
         overview: "Overview Engine", 
